@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>网易云</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/container-imgplay.css">
+	<link rel="stylesheet" type="text/css" href="css/container-group.css">
+</head>
+<body>
+	<script type="text/x-template" id='newsong'>
+		<div>
+			<p class='h'>
+				<span>最新音乐</span>
+				<span class='more'>更多 &gt;</span>
+			</p>
+			<div class='newsong-list'>
+				<div v-for='i in 10'>
+					<div>{{String(i).length>1?i:'0'+i}}</div>
+					<div :style='colorBlock()' class='colorBlock'></div>
+					<div>
+						<span>{{items.songname[i-1]}}</span>
+						<span>{{items.author[i-1]}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	 <div id="musicApp">
+	 	<div id='header'>
+	 		<span>网易云音乐</span>
+	 	</div>
+	 	<div id="container">
+	 		<div class="aside">
+	 			<span>发现音乐</span>
+	 		</div>
+	 		<div class="contains">
+	 			<div class="top">
+	 				<div class="tip">发现音乐</div>
+	 				<div class="tab">
+	 					<ul>
+	 						<li>个性推荐</li>
+	 						<li>歌单</li>
+	 						<li>主播电台</li>
+	 						<li>最新音乐</li>
+	 						<li>歌手</li>
+	 					</ul>
+	 				</div>
+	 			</div>
+	 			<div class="center">
+	 				<div class='center-contains'>
+	 					<div class=imgs-play>
+		 					<div class="items" id="items">
+		 						<div v-for="item in items" class="item">
+		 							<img v-bind:src="item" />
+		 						</div>
+		 					</div> 
+ 							<div class='left'>
+ 								<span>&lt;</span>
+ 							</div>
+ 							<div class='marks'>
+ 								<span 
+ 									v-for='i in (items.length-2)'
+ 									class='mark'
+ 									></span>
+ 							</div>
+ 							<div class='right'>
+ 								<span>&gt;</span>
+ 							</div>
+	 					</div>
+	 					<div class="FM">
+							<div>
+								<div>
+									<div class="imgs"><img src="imgs/图标/FM.png"></div>
+									<div class="content">
+										<span>私人FM</span><br>
+										<span>享受你的音乐专属推荐</span>
+									</div>
+								</div>
+							</div>
+							<div class="add-border">
+								<div>
+									<div class="imgs"><img src="imgs/图标/Day.png"></div>
+									<div class="content">
+										<span>每日推荐</span><br>
+										<span>根据你的口味生成</span>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>
+									<div class="imgs"><img src="imgs/图标/Top.png"></div>
+									<div class="content">
+										<span>排行榜</span><br>
+										<span>最热音乐榜</span>
+									</div>
+								</div>
+							</div>
+	 					</div>
+	 					<Recom 
+	 						:listsong='listDetails'
+	 						:list='listDetails.dec'
+	 						class='Recom'>
+	 					</Recom>
+	 					<songs
+	 						:song='newsong'
+	 						class='newsong'>
+	 					</songs>
+	 					<div><br><br><br><br></div>
+	 				</div>
+	 			</div>
+	 		</div>
+
+	 	</div>
+
+	 	<div id="footer">
+	 		<audio controls="controls" style="width:100%">
+			  Your browser does not support the <code>audio</code> element.
+			  <source src="" type="audio/wav">
+			</audio>
+	 	</div>
+	 </div>
+	 <script src="javascript/vue.js"></script>
+	 <script src="javascript/index.js"></script>
+	 <script src="javascript/图片轮播.js"></script>
+</body>
+</html>

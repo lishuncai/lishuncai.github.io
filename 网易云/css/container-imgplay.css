@@ -1,0 +1,106 @@
+#container>.contains>.center{
+	/*flex: 9;*/
+	position:relative;
+	display: flex;
+}
+#container>.contains>.center>.center-contains{
+	max-width: 999px;
+	min-width: 420px;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: hidden;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play{
+	position: relative;
+	display: flex;
+	padding-bottom: 4%;
+	padding-top: 10%;
+	/*设置padding百分比的话，高度就可以自适应了*/
+	overflow: hidden;
+/*	justify-content: center;*//*不能设置这条规则啊啊啊*/
+	align-items: center;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play .left,.right,.marks{
+	transform: scale(1);
+	z-index: 999;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play .left,.right{
+	width: 35px;
+	height: 100%;
+	color: white;
+	font-size: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	cursor: pointer;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play .left{
+	margin-right: auto;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play .marks{
+	position: absolute;
+	bottom: 7%;
+	/*上两条是为了同时满足edge和chrome*/
+	left: 50%;
+	transform: translate(-50%);
+	display: flex;
+	align-items: flex-end;
+
+}
+#container>.contains>.center>.center-contains
+>.imgs-play .mark{
+	display: inline-block;
+	width: 8px;
+	height:8px;
+	border: 1px solid white;
+	border-radius: 100px;
+	margin:4px;
+}
+/*图片组*/
+#container>.contains>.center>.center-contains
+>.imgs-play>.items{
+	width: calc(100%/3*9);
+	overflow: hidden;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+	position: absolute;
+	overflow: visible;
+}
+[move]{
+	transition: all .5s ease;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play>.items>.item{
+	display: inline-block;
+	flex: 1;
+	overflow: visible;
+}
+#container>.contains>.center>.center-contains
+>.imgs-play>.items img{
+	width: 100%;
+	height: 100%;
+}
+[scale='big']{
+	transition: transform .5s;
+	filter: brightness(1.5);
+	position: relative;	
+	z-index: 99;
+}
+[scale='small']{
+	transition: transform .3s;
+	
+}
+
+
+
+
+

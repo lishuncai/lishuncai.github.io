@@ -1,0 +1,72 @@
+#container>.contains>.center{
+	flex: 9;
+	position:relative;
+}
+#container>.contains>.center>.center-contains{
+	max-width: 999px;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: hidden;
+}
+#container>.contains>.center>.center-contains
+>.items{
+	width: calc(100%/3*7);
+	margin-top: 50px;
+	overflow: hidden;
+	display: flex;
+	flex-flow: row nowrap;
+}
+#container>.contains>.center>.center-contains
+>.items>.item{
+	display: inline-block;
+	max-width: 333px;
+	height: 100%;
+}
+#container>.contains>.center>.center-contains
+>.items img{
+	width: 100%;
+	height: 100%;
+}
+#container>.contains>.center>.center-contains
+>.FM{
+	width: 100%;
+	height: 60px;
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+}
+#container>.contains>.center>.center-contains
+>.FM>div{
+	flex: 1;
+	display: flex;
+	justify-content: space-around;
+}
+#container>.contains>.center>.center-contains
+>.FM>.add-border{
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+#container>.contains>.center>.center-contains
+>.FM>div img{
+	display: inline-block;
+	padding: 5px;
+	width: 60px;
+	height: 60px;
+}
+#container>.contains>.center>.center-contains
+>.FM>div .content{
+	display: inline-block;
+	height: 60px;
+	transform: translateY(-12px);
+}
+#container>.contains>.center>.center-contains
+>.FM>div .content>span:last-child{
+	font-size: 0.8rem;
+	color: #999;
+}
+#container>.contains>.center>.center-contains
+>.FM>div span{
+
+}
