@@ -69,20 +69,20 @@ function build(){
 Vue.component(
 	'Recom',{
 		template:
-		`<div>
-			<p class='h'>
-				<span>推荐歌单</span>
-				<span class='more'>更多 &gt;</span>
-			</p>
-			<div class='lists'>
-				<div v-for='(dec,index) in list' class='list'>
-					<div class='dec'>
-						<span class='num'>{{listsong.played()}}</span>
-					</div>
-					<span>{{dec}}</span>
-				</div>
-			</div>
-		</div>`,
+		"<div>\
+			<p class='h'>\
+				<span>推荐歌单</span>\
+				<span class='more'>更多 &gt;</span>\
+			</p>\
+			<div class='lists'>\
+				<div v-for='(dec,index) in list' class='list'>\
+					<div class='dec'>\
+						<span class='num'>{{listsong.played()}}</span>\
+					</div>\
+					<span>{{dec}}</span>\
+				</div>\
+			</div>\
+		</div>",
 		props:['listsong','list'],
 		data:function(){
 			return {
@@ -100,7 +100,7 @@ Vue.component(
 	}
 )
 Vue.component('songs',{
-		template:'#newsong',
+		template:'#my-newsong',
 		props:{
 			song:Object
 		},
@@ -120,6 +120,7 @@ var app=new Vue({
 		items:imgs,
 		Groups:Groups,
 		listDetails:listDetails,
-		newsong:newestSong
+		newsong:newestSong,
+		change:false
 	}
 });

@@ -1,5 +1,4 @@
-#container>.contains>.center>.center-contains
->.FM{
+#FM{
 	width: 100%;
 	height: 50px;
 	margin: 4% 0;
@@ -7,25 +6,21 @@
 	display: flex;
 	justify-content: space-between;
 }
-#container>.contains>.center>.center-contains
->.FM>div{
+#FM>div{
 	flex: 1;
 	display: flex;
 	justify-content: space-around;
 }
-#container>.contains>.center>.center-contains
->.FM>.add-border{
+#FM>.add-border{
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 }
-#container>.contains>.center>.center-contains
->.FM>div>div{
+#FM>div>div{
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 }
-#container>.contains>.center>.center-contains
->.FM>div .imgs{
+#FM>div .imgs{
 	display: flex;
 	width: 50px;
 	height: 50px;
@@ -33,30 +28,25 @@
 	border: 1px solid rgba(10,10,255,0.8);
 	border-radius: 50px;
 }
-#container>.contains>.center>.center-contains
->.FM>div .imgs img{
+#FM>div .imgs img{
 	width: 100%;
 	height:100%;
 	flex: auto;
 }
-#container>.contains>.center>.center-contains
->.FM>div :active{
+#FM>div :active{
 	transform: scale(0.98);
 }
-#container>.contains>.center>.center-contains
->.FM>div .content{
+#FM>div .content{
 	display: inline-block;
 	margin-left: 10px;
 }
-#container>.contains>.center>.center-contains
->.FM>div .content>span:last-child{
+#FM>div .content>span:last-child{
 	font-size: 0.78rem;
 	color: #999;
 }
 
 
-/*推荐歌单*/
-#container>.contains>.center>.center-contains 
+/*推荐歌单*/ 
 .h{
 	border-bottom: 1px solid #eee;
 	padding: 0 0 10px 0;
@@ -64,39 +54,34 @@
 	display: flex;
 	justify-content: space-between;
 	font-size: 0.95rem;
-}
-#container>.contains>.center>.center-contains 
+} 
 .more{
 	color: #aaa;
 	font-size: 0.8rem;
 }
 
-#container>.contains>.center>.center-contains
-.Recom{
+#Recom{
+	margin-top: 50px;
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 }
 
-#container>.contains>.center>.center-contains
-.Recom .lists{
+#Recom .lists{
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-between;
 }
-#container>.contains>.center>.center-contains
-.Recom .list{
+#Recom .list{
 	flex:0 50px;
 	max-width: 48%; 
 	min-width: 18%;
 	margin-top: 20px;
-	display: flex;
 	flex-flow: row wrap;
 }
 
-#container>.contains>.center>.center-contains
-.Recom .dec{
+#Recom .dec{
 	background-color: grey;
 	width:100%;
 	padding:50%;
@@ -104,12 +89,10 @@
 	transition:box-shadow 0.5s;
 	position: relative;
 }
-#container>.contains>.center>.center-contains
-.Recom .dec:hover{
+#Recom .dec:hover{
 	box-shadow:inset 0px 0px 5px 500px rgba(255,255,255,0.3);
 }
-#container>.contains>.center>.center-contains
-.Recom .list>span{
+#Recom .list>span{
 	display: block;
 	flex: auto;
 	width: 100%;
@@ -117,8 +100,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-#container>.contains>.center>.center-contains
-.Recom .list .num{
+#Recom .list .num{
 	height: 14px;
 	line-height: 14px;
 	right: 0;
@@ -130,47 +112,57 @@
 }
 
 /*最新音乐*/
-#container>.contains>.center>.center-contains
-.newsong{
+#songs{
 	display: flex;
 	flex-flow: column nowrap;
 	margin-top: 50px;
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list{
+#songs .newsong-list{
 	margin-top: 20px;
 	display: flex;
 	flex-flow: row wrap;
 	width:100%;
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list>div{
+#songs .newsong-list>div{
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	width:50%;
-	height:65px;
-
+	height:80px;
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list>div>div:first-child{
-	margin: 0 4px;
+#songs .newsong-list>div:hover{
+	box-shadow: inset 0 0 0 100px rgba(180,180,180,0.1)
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list>div:nth-child(2n+1){
+#songs .newsong-list>div:nth-child(2n+1){
 	border-right: 1px solid #ccc;
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list>div:nth-child(4n+1){
-	background-color: rgba(200,200,200,0.1);
+#songs .newsong-list>div:nth-child(4n+1){
+	background-color: rgba(220,220,220,0.1);
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list>div:nth-child(4n+2){
-	background-color: rgba(200,200,200,0.1);
+#songs .newsong-list>div:nth-child(4n+2){
+	background-color: rgba(220,220,220,0.1);
 }
-#container>.contains>.center>.center-contains
-.newsong .newsong-list .colorBlock{
-	width: 40px;
-	height: 40px;
+#songs .newsong-list>div>div:first-child{
+	margin: 0 10px;
+}
+#songs .newsong-list .colorBlock{
+	width: 60px;
+	height: 60px;
 	margin: 0 2px;
+}
+#songs .newsong-list>div>div span:last-child{
+	font-size: 0.8rem;
+	color: #ccc;
+}
+.change-list{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	z-index: 999;
+	background-color: rgba(250,250,250,0.5);
+}
+.pop-enter,.pop-leave{
+	opacity: 0;
 }

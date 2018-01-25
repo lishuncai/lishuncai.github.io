@@ -2,13 +2,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>网易云</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/container-imgplay.css">
 	<link rel="stylesheet" type="text/css" href="css/container-group.css">
 </head>
 <body>
-	<script type="text/x-template" id='newsong'>
+	<script type="text/x-template" id='my-newsong'>
 		<div>
 			<p class='h'>
 				<span>最新音乐</span>
@@ -19,7 +20,7 @@
 					<div>{{String(i).length>1?i:'0'+i}}</div>
 					<div :style='colorBlock()' class='colorBlock'></div>
 					<div>
-						<span>{{items.songname[i-1]}}</span>
+						<span>{{items.songname[i-1]}}</span><br>
 						<span>{{items.author[i-1]}}</span>
 					</div>
 				</div>
@@ -68,7 +69,7 @@
  								<span>&gt;</span>
  							</div>
 	 					</div>
-	 					<div class="FM">
+	 					<div id="FM">
 							<div>
 								<div>
 									<div class="imgs"><img src="imgs/图标/FM.png"></div>
@@ -98,15 +99,39 @@
 							</div>
 	 					</div>
 	 					<Recom 
+	 						id='Recom'
 	 						:listsong='listDetails'
 	 						:list='listDetails.dec'
 	 						class='Recom'>
 	 					</Recom>
 	 					<songs
+	 						id='songs'
 	 						:song='newsong'
 	 						class='newsong'>
 	 					</songs>
-	 					<div><br><br><br><br></div>
+	 					
+	 					<!-- <div>
+							<p>根据喜好调整栏目顺序</p>
+							<div >
+								<button >
+									调整栏目
+								</button>
+							</div>
+							<transition name='pop'>
+								<div v-if='true' class='change-lis'>
+									<div class='change-list'>
+										<p>调整栏目顺序
+											<span>x</span>
+										</p>
+										<div>
+											<button>调整</button>
+										</div>
+									</div>
+								</div>
+							</transition>
+							
+	 					</div> -->
+
 	 				</div>
 	 			</div>
 	 		</div>

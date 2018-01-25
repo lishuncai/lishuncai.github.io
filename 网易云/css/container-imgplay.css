@@ -68,12 +68,11 @@
 #container>.contains>.center>.center-contains
 >.imgs-play>.items{
 	width: calc(100%/3*9);
-	overflow: hidden;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
+	top:30%;
 	position: absolute;
-	overflow: visible;
 }
 [move]{
 	transition: all .5s ease;

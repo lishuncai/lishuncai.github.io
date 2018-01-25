@@ -79,22 +79,21 @@ but_right.derection='right';
 but_left.addEventListener('mouseover',butOver,false);
 but_right.addEventListener('mouseover',butOver,false);
 
-imgs.forEach(function(key){
-	key.big=function(){
-		this.style.transform='scale(1.2)'+'translateY(-7%)';
-	}
-	key.small=function(){
+for(var i=0;i<imgs.length;i++){
+	imgs[i].small=function(){
 		this.style.transform='scale(1)'+'translateY(0)';
-	}
-	key.addEvent('mouseover',function(){
+	};
+	imgs[i].big=function(){
+		this.style.transform='scale(1.2)'+'translateY(-7%)';
+	};
+	imgs[i].addEvent('mouseover',function(){
 		var restyle=this.style.filter;
 		this.style.filter+='contrast(0.6)';
 		this.addEvent('mouseout',function(){
 			this.style.filter=restyle;
 		})
 	},false)
-})
-
+}
 play();
 function play(derection){
 	clearTimeout(timer);
@@ -163,9 +162,9 @@ function right(){
 		imgs[n+1].style.filter='brightness(160%)';
 		imgs[n+1].big();
 	}
-	marks.forEach(function(key){
-		key.style.backgroundColor='';
-	});
+	for(var i=0;i<marks.length;i++){
+		marks[i].style.backgroundColor="";
+	}
 	marks[n].style.backgroundColor='#ccc';
 }
 

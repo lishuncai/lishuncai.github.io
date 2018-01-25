@@ -2,14 +2,6 @@
 	flex: 9;
 	position:relative;
 }
-#container>.contains>.center>.center-contains{
-	max-width: 999px;
-	width: 100%;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	overflow: hidden;
-}
 #container>.contains>.center>.center-contains
 >.items{
 	width: calc(100%/3*7);
