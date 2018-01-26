@@ -84,7 +84,7 @@ for(var i=0;i<imgs.length;i++){
 		this.style.transform='scale(1)'+'translateY(0)';
 	};
 	imgs[i].big=function(){
-		this.style.transform='scale(1.2)'+'translateY(-7%)';
+		this.style.transform='scale(1.2)'+'translateY(-6%)';
 	};
 	imgs[i].addEvent('mouseover',function(){
 		var restyle=this.style.filter;

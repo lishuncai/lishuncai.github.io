@@ -5,12 +5,12 @@
 }
 #container>.contains>.center>.center-contains{
 	max-width: 999px;
-	min-width: 420px;
 	width: 100%;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	overflow: hidden;
+
 }
 #container>.contains>.center>.center-contains
 >.imgs-play{

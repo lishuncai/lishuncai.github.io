@@ -1,6 +1,5 @@
 #FM{
 	width: 100%;
-	height: 50px;
 	margin: 4% 0;
 	overflow: hidden;
 	display: flex;
@@ -17,16 +16,16 @@
 }
 #FM>div>div{
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 	align-items: center;
 }
 #FM>div .imgs{
 	display: flex;
 	width: 50px;
-	height: 50px;
 	padding: 14px;
 	border: 1px solid rgba(10,10,255,0.8);
 	border-radius: 50px;
+	margin: 0 10px;
 }
 #FM>div .imgs img{
 	width: 100%;
@@ -38,7 +37,7 @@
 }
 #FM>div .content{
 	display: inline-block;
-	margin-left: 10px;
+/*	margin-left: 10px;*/
 }
 #FM>div .content>span:last-child{
 	font-size: 0.78rem;
@@ -140,7 +139,7 @@
 	background-color: rgba(220,220,220,0.1);
 }
 #songs .newsong-list>div:nth-child(4n+2){
-	background-color: rgba(220,220,220,0.1);
+	background-color: rgba(220,220,220,0.2);
 }
 #songs .newsong-list>div>div:first-child{
 	margin: 0 10px;

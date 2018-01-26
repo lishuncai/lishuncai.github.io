@@ -51,7 +51,7 @@ html,body{
 	overflow-x: hidden;
 }
 #container>.contains>.top{
-	min-width: 399px;
+/*	min-width: 380px;*/
 	border-bottom: 1px solid #ccc;
 }
 #container>.contains>.top>.tip{
@@ -60,18 +60,28 @@ html,body{
 }
 #container>.contains>.top>.tab{
 	height: 50%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
 }
-#container>.contains>.top>.tab ul{
+/*#container>.contains>.top>.tab {
 	width:100%;
 	height:100%;
 	line-height: 100%;
 	list-style: none;
 	display:flex;
 	align-content: space-around;
+}*/
+#container>.contains>.top>.tab p{
+	display: flex;
+	justify-content: space-between;
 }
-#container>.contains>.top>.tab ul li{
+#container>.contains>.top>.tab span{
+	font-size: 1rem;
+/*	display: inline-block;*/
+	padding: 0 10px;
 	height: 100%;
 	line-height: 200%;
-	padding-right: 20px;
+
 }
 
