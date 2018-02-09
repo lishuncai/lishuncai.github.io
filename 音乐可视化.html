@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>html5音乐可视化</title>
+	<style type="text/css">
+		canvas{
+			border:1px solid black;
+			background-color:#555;
+			display: block;
+			margin:0 auto;
+		}
+		body>div{
+			display: block;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.controls-time{
+			width:50%;
+			height:18px;
+		}
+		.duration{
+			height:2px;
+			margin-top:8px;
+			background:#eee;
+			position:relative;
+		}
+		.duration-red{
+			width:0;
+			height:100%;
+			margin:0;
+			padding:0;
+			background:#BC2F2E;
+			
+		}
+		.circles{
+			box-sizing:border-box;
+			height:18px;
+			width:18px;
+			background:white;
+			border:1px solid #ccc;
+			border-radius:20px;
+			position:absolute;
+			transform:translate(-50%,-50%);
+			z-index:999;
+			/*这里用translate比较合适，初始offsetLeft=0*/
+		}
+		.circles-center{
+			position:absolute;
+			top:6px;
+			left:6px;
+			bottom:6px;
+			right:6px;
+			border-radius:8px;
+			background:#BC2F2E;
+			
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'></canvas>
+	<div><input id='audio' type="file" name="" accept="audio/*"></div>
+	<div>
+		<input id='range' step='1' type="range" value='30' min='0' max='100'>
+		<span id='num'></span>
+	</div>
+	<div class='controls-time'>
+		<div class='duration'>
+			<div class='circles'>
+				<div class='circles-center'></div>
+			</div>
+			<div class='duration-red'></div>
+		</div>
+	</div>
+	
+	<!--[if IE]>
+		<p>此功能不支持ie浏览器，推荐使用较新版本的Chrome，火狐，edge等浏览器</p>
+	<![endif]-->
+	<script>
+		var audioInput=document.getElementById('audio');
+		var ac;
+		var gainNode;
+		var analyser;
+		var ArrayBuffer;
+		var bufferSource;
+		var source;
+		var size;
+		var Hots=[];	
+		var times;
+		var animationFrame;
+		var circlesAnimation;
+		var range=document.querySelector('#range');
+		var shownum=document.querySelector('#num');
+		var fileLoadResolve=false;
+		audioInput.onchange=function(){
+			source && source.stop();
+			 if(audio.files!==0){
+			 	var file=audio.files[0];
+			 	var reader=new FileReader();
+			 	reader.readAsArrayBuffer(file);
+			 	// if(reader.readyState===2){}
+			 	reader.onload=function(){
+			 		fileLoadResolve=true;
+			 		build(reader,0)
+			 	};
+			}
+		}
+
+		function build(reader,when){
+			 		ac=new (window.AudioContext||window.webkitAudioContext||window.mozAudioContext)();
+					gainNode=ac.createGain();
+					gainNode.connect(ac.destination);
+					analyser=ac.createAnalyser();
+					analyser.fftSize=64;
+					analyser.connect(gainNode);
+			 		ArrayBuffer=reader.result;
+
+			 		ac.decodeAudioData(ArrayBuffer,function(buffer){
+			 			bufferSource=ac.createBufferSource();
+			 			bufferSource.buffer=buffer;
+			 			times=bufferSource.buffer.duration;
+			 			size=analyser.frequencyBinCount;
+			 			bufferSource.connect(analyser);
+			 			bufferSource.start(0,when,bufferSource.buffer.duration);
+			 			source=bufferSource;
+
+			 			width=canvas.width/size;
+			 			for(var i=0;i<size;i++){
+							Hots.push({
+								y:canvas.height/2
+							})
+						}
+						draw();
+
+						playDuration(when);
+						sliding();
+			 		},function(err){
+			 			console.error(err);
+			 		})	
+			 	}
+
+		var circles=document.querySelectorAll('.circles')[0];
+		var duration=document.querySelectorAll('.duration')[0];
+		var canvas=document.getElementById('canvas');
+		var canvasCtx=canvas.getContext('2d');
+		var width;
+		var controlsTime=document.querySelector('.controls-time');
+		var durationRed=document.querySelector('.duration-red');
+
+		function draw(){
+			window.cancelAnimationFrame(animationFrame);
+			var arr=new Uint8Array(size);
+			analyser.getByteFrequencyData(arr);
+
+			canvasCtx.clearRect(0,0,canvas.width,canvas.height);
+			for(var i=0;i<size;i++){
+				var height=arr[i];
+				canvasCtx.fillStyle='rgba(255,255,255,1)';
+				canvasCtx.lineWidth=0.1;
+				canvasCtx.strokeStyle='rgba(255,255,255,0.1)';
+				canvasCtx.fillRect((i)*width,canvas.height/2,width/2,-arr[i]*0.2);
+				canvasCtx.fillRect((i)*width,Hots[i].y,width/2,-1);
+				//左上
+				canvasCtx.fillRect((i)*width,Hots[i].y,width/2,-1);
+				canvasCtx.fillStyle='rgba(0,0,0,0.2)';
+				canvasCtx.fillRect((i)*width,canvas.height/2,width/2,arr[i]*0.1);
+
+				Hots[i].y+=0.2;
+				if(Hots[i].y<0){
+					Hots[i].y=0;
+				}
+				if(Hots[i].y>canvas.height/2){
+					Hots[i].y=canvas.height/2;
+				}
+				if(Hots[i].y>canvas.height/2-arr[i]*0.2){
+					Hots[i].y-=4;
+				}
+				
+			}
+			animationFrame=window.requestAnimationFrame(draw);
+		}
+//调整音量
+		var range=document.querySelector('#range');
+		range.addEventListener('change',function(){
+			volume(this.value/this.max)
+		},false);
+		function volume(num){
+			gainNode.gain.value=num;
+			shownum.innerHTML=Math.floor(num*100);
+		}
+//进度条播放
+		function playDuration(when){
+			if(ac.currentTime && when+ac.currentTime>=times){
+				circles.style.left=0+'px';
+				window.cancelAnimationFrame(animationFrame);
+				console.log('播放完成');
+				ac.close();
+			}else{
+				var time=Math.floor((when+ac.currentTime)/times *duration.offsetWidth);
+				circles.style.left=time+'px';
+				durationRed.style.width=time+'px';
+				circlesAnimation=window.requestAnimationFrame(function(){
+					playDuration(when);
+				});
+				/*这里有个问题,如果用
+				circlesAnimation=window.requestAniamtionFrame(playDuration);
+				第二次执行 draw(when) 时，when 会自动变成 
+				bufferSource.buffer.duration 的值，神奇的bug！！！*/
+			}	
+		}
+
+
+
+//滑动进度条,跳播
+		function acRebuild(when){
+			if(ac.state!=='closed'){
+				ac.close()
+			}else{
+				return
+			}
+			var file=audio.files[0];
+		 	var reader=new FileReader();
+		 	reader.readAsArrayBuffer(file);
+			reader.onload=function(){
+				build(reader,when)
+			}
+			
+		}
+
+		
+		function sliding(){
+			var L;
+			function move(e){
+				e=e||window.event;
+				L=e.clientX-duration.offsetLeft;
+				circles.style.left=L+'px';
+				if(L<0){
+					circles.style.left=0+'px'
+				}else if(L>duration.offsetWidth){
+					circles.style.left=duration.offsetWidth+'px'
+				}
+			}
+			function up(){
+				var when=L /duration.offsetWidth *bufferSource.buffer.duration;
+					acRebuild(when);
+					document.body.removeEventListener('mousemove',move);
+					document.body.removeEventListener('mouseup',up)
+			}
+			function down(e){
+				window.cancelAnimationFrame(circlesAnimation);
+				document.body.addEventListener('mousemove',move,false);
+				document.body.addEventListener('mouseup',up,false);
+			}
+			circles.onmousedown=function(e){
+				e=e||window.event;
+				down(e);
+				e.stopPropagation();
+				e.preventDefault();
+			};
+			controlsTime.onmousedown=function(e){
+				e=e||window.event;
+				window.cancelAnimationFrame(circlesAnimation);
+				var when=(e.clientX-duration.offsetLeft)/duration.offsetWidth*bufferSource.buffer.duration;
+				acRebuild(when);
+				e.preventDefault();
+			}
+			//duration.addEventListener('mousedown',jump,false)
+		}
+		
+	</script>
+</body>
+</html>
