@@ -1,0 +1,18 @@
+#footer .cover{
+  width: 60px;
+  height: 60px;
+  background-color: grey;
+}
+#footer .controls{
+  width: 200px;
+  height: 100%;
+}
+#footer .controls>div{
+  width: 40px;
+  height: 40px;
+  background-color:grey;
+  margin: 5px;
+}
+#footer .timer{
+  width: 100%;
+}

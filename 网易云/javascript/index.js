@@ -1,12 +1,11 @@
 //轮播图；
 var imgs=[];
 for(var i=0;i<6;i++){
-	var url='imgs/轮播图/'+i+'.jpg';
+	var url='background-image:url(imgs/轮播图/'+i+'.jpg)';
 	imgs.push(url);
 }
 //重复三张图片
 imgs.push(imgs[0],imgs[1],imgs[2]);
-
 //栏目
 var Groups=[
 {head:'推荐歌单', cla:'Recom',name:'Recom'},
@@ -53,7 +52,7 @@ var newestSong={
 		var g=Math.floor(Math.random()*256);
 		var b=Math.floor(Math.random()*256);
 		return 'rgb('+r+','+g+','+b+')';
-		
+
 	},
 	songname:[],
 	author:[]
@@ -113,7 +112,7 @@ Vue.component('songs',{
 			}
 		}
 	})
-
+var imgbg=imgs[0];
 var app=new Vue({
 	el:"#musicApp",
 	data:{

@@ -1,0 +1,23 @@
+#aside{
+	display: flex;
+	flex-flow: column nowrap;
+}
+#aside>.menu-but{
+	flex: 0;
+	margin: 20px 10px;  
+}
+#aside>.menu-but:active{
+	filter: drop-shadow(0px 1px 1px black);
+}
+#aside>.menu-but>div{
+	border-bottom: 1px solid #333;
+	width: 15px;
+	height: 1px;
+	margin-bottom: 4px;
+}
+#aside>.menu{
+	flex: 9;
+}
+#aside .User{
+	border-top: 1px solid #ccc;
+}

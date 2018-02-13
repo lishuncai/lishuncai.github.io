@@ -4,10 +4,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>网易云</title>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<link rel="stylesheet" type="text/css" href="css/container-imgplay.css">
-	<link rel="stylesheet" type="text/css" href="css/container-group.css">
-	<link rel="stylesheet" type="text/css" href="css/media.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/container-imgplay.css">
+	<link rel="stylesheet" href="css/container-group.css">
+	<link rel="stylesheet" href="css/media.css">
+	<link rel="stylesheet" href="css/调整栏目.css">
+	<link rel="stylesheet" href="css/aside.css">
+	<link rel="stylesheet" href="css/footer.css">
+
 </head>
 <body>
 	<script type="text/x-template" id='my-newsong'>
@@ -33,8 +37,18 @@
 	 		<span>网易云音乐</span>
 	 	</div>
 	 	<div id="container">
-	 		<div class="aside">
-	 			<span>发现音乐</span>
+	 		<div class="aside" id='aside'>
+	 			<div class='menu-but'>
+	 				<div></div>
+	 				<div></div>
+	 				<div></div>
+	 			</div>
+	 			<div class='menu'>
+	 				<p>发现音乐</p>
+					<p>本地音乐</p>
+					<p>添加歌单</p>
+	 			</div>
+	 			<div class='User'>账户</div>
 	 		</div>
 	 		<div class="contains">
 	 			<div class="top">
@@ -43,35 +57,26 @@
 	 					<p>
 	 						<span>个性推荐</span>
 	 						<span>歌单</span>
-	 						<span>主播电台</span>
 	 					</p>
  						<p>
  							<span>最新音乐</span>
  							<span>歌手</span>
  						</p>
- 						
+
 	 				</div>
 	 			</div>
 	 			<div class="center">
 	 				<div class='center-contains'>
-	 					<div class=imgs-play>
+	 					<div class="imgs-play" id='imgsPlay'>
 		 					<div class="items" id="items">
-		 						<div v-for="item in items" class="item">
-		 							<img v-bind:src="item" />
+		 						<div v-for="item in items" class="item" :style='item'>
 		 						</div>
-		 					</div> 
- 							<div class='left'>
- 								<span>&lt;</span>
- 							</div>
- 							<div class='marks'>
- 								<span 
- 									v-for='i in (items.length-2)'
- 									class='mark'
- 									></span>
- 							</div>
- 							<div class='right'>
- 								<span>&gt;</span>
- 							</div>
+		 					</div>
+							<div class='marks'>
+								<span v-for='i in 6'></span>
+							</div>
+							<div class='leftBut'><span>&lt;</span></div>
+							<div class='rightBut'><span>&gt;</span></div>
 	 					</div>
 	 					<div id="FM">
 							<div>
@@ -102,7 +107,7 @@
 								</div>
 							</div>
 	 					</div>
-	 					<Recom 
+	 					<Recom
 	 						id='Recom'
 	 						:listsong='listDetails'
 	 						:list='listDetails.dec'
@@ -113,42 +118,44 @@
 	 						:song='newsong'
 	 						class='newsong'>
 	 					</songs>
-	 					
-	 					<!-- <div>
-							<p>根据喜好调整栏目顺序</p>
-							<div >
-								<button >
-									调整栏目
-								</button>
+	 					<div id='adjust'>
+	 						<p>根据喜好调整栏目顺序</p>
+							<div>
+								<button>调整栏目</button>
 							</div>
-							<transition name='pop'>
-								<div v-if='true' class='change-lis'>
-									<div class='change-list'>
-										<p>调整栏目顺序
-											<span>x</span>
-										</p>
-										<div>
-											<button>调整</button>
-										</div>
-									</div>
-								</div>
-							</transition>
-							
-	 					</div> -->
-
+ 						</div>
 	 				</div>
+	 				<!-- <transition name='pop'>
+						<div v-if='true' class='change-lis'>
+							<div class='change-list'>
+								<p>调整栏目顺序
+									<span>x</span>
+								</p>
+								<div>
+									<button>调整</button>
+								</div>
+							</div>
+						</div>
+					</transition> -->
 	 			</div>
 	 		</div>
-
 	 	</div>
-
 	 	<div id="footer">
-	 		<audio controls="controls" style="width:100%">
-			  Your browser does not support the <code>audio</code> element.
-			  <source src="" type="audio/wav">
-			</audio>
+
+			<div class='cover'>
+				<div>图片</div>
+			</div>
+			<div class='controls'>
+				<div class='last'></div>
+				<div ></div>
+				<div class='next'></div>
+			</div>
+			<div class='time'>
+				<div></div>
+			</div>
 	 	</div>
 	 </div>
+
 	 <script src="javascript/vue.js"></script>
 	 <script src="javascript/index.js"></script>
 	 <script src="javascript/图片轮播.js"></script>

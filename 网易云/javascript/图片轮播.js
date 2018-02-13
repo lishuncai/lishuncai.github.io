@@ -1,175 +1,148 @@
-//原生js图片轮播
-var n=0;
-var timer=null;
-var speed=1500;
+/*图片轮播 imgsPlay*/
+/*重点在于临界处理,先监测值再增值；*/
+var imgsPlay=document.getElementById('imgsPlay');
+var leftBut=imgsPlay.querySelector('.leftBut'),
+    rightBut=imgsPlay.querySelector('.rightBut');
+var items=imgsPlay.querySelector('#items');
+    items.move=true;
+var itemArr=items.querySelectorAll('.item');
+    itemArr[1].setAttribute('scale','big');
+var marks=imgsPlay.querySelectorAll('.marks >span');
+var timer;  //定时器；
+var n=0;  //系数；
+var L;  //图片数量；
+var speed=2000; //定时器间隔；
+var timerMove;    // 延迟移动的定时器；
+var timersetAttr;   //延迟赋予属性的定时器；
+var timerClick;   //点击定时器，用来限制点击之间
+//将定时器和运动函数分离，方便扩张
+L=itemArr.length-3;
+items.setAttribute('move','');
+function setTimer(){
+  clearTimeout(timer);
+  timer=setTimeout(setTimer,speed);
+  move();
+}
+function move(dir){
+  dir=dir||'right';
+  if(dir==='right'){
+    if(n>L-1){
+      //移除元素过度属性
+      n=0;
+      items.move=false;
+      items.removeAttribute('move');
+      itemArr[L+1].removeAttribute('scale');
+      itemArr[1].removeAttribute('scale');
+      itemArr[1].setAttribute('transform','');
+      items.style.marginLeft= -(n/3)*100+'%';
+    }
 
-var contains=document.querySelector('.center-contains'),
- 	controls=contains.querySelector('.controls'),
-	imgsPlay=contains.querySelector('.imgs-play'),
-	but_left=contains.querySelector('.left'),
-	but_right=contains.querySelector('.right'),
-	marks=contains.querySelectorAll('.mark');
-
-var items=document.querySelector('#items');
-	itemArr=items.querySelectorAll('.item'),
-	imgs=items.querySelectorAll('img'),
-	item=itemArr[0];
-var itemWidth;
-
-	
-Object.prototype.addEvent=function(evenType,callback,nostop){
-	this.addEventListener(evenType,function(e){
-		var e=e||window.event;
-		//如果nostop为true，可根据情况手动阻止冒泡或默认行为;
-		if(nostop){
-			callback();
-			// callback.call(this);//this为点击对象
-		}else{
-			e.stopPropagation();
-			e.preventDefault();
-			callback.call(this);
-		}
-	},nostop);
+    n++;
+  }
+  if(dir==='left'){
+    if(n<1){
+      n=L;
+      items.removeAttribute('move');
+      items.move=false;
+      itemArr[1].removeAttribute('scale');
+      itemArr[L+1].removeAttribute('scale');
+      itemArr[L+1].setAttribute('transform','');
+      items.style.marginLeft= -(n/3)*100+'%';
+    }
+    n--;
+  }
+  //恢复上面移除的属性，设置时间间隔不小于300ms,
+  //避免恢复属性后因时间间隔过短影响上面的属性取消操作；
+  if(items.move===false){
+    //items.move=false时表示已经替换位置了
+    items.move=true;
+    clearTimeout(timersetAttr);
+    timersetAttr=setTimeout(function(){
+      items.setAttribute('move','');
+      if(dir==='right'){
+        itemArr[1].removeAttribute('transform');
+        itemArr[1].setAttribute('scale','small');
+        itemArr[L+1].setAttribute('scale','small');
+      }else{
+        itemArr[L+1].removeAttribute('transform');
+        itemArr[L+1].setAttribute('scale','small');
+        itemArr[1].setAttribute('scale','small');
+      }
+    },300)
+  }
+  function scaleRight(){
+    itemArr[n+1].setAttribute('scale','big');
+    itemArr[n].setAttribute('scale','small');
+  }
+  function scaleLeft(){
+    itemArr[n+1].setAttribute('scale','big');
+    itemArr[n+2].setAttribute('scale','small');
+  }
+  clearTimeout(timerMove);
+  timerMove=setTimeout(function(){
+    if(dir==='left'){
+      scaleLeft();
+      jump(n)
+    }
+    if(dir==='right'){
+      scaleRight();
+      jump(n-1);
+    }
+  items.style.marginLeft= -(n/3)*100+'%';
+  /* 除以3是因为margin-left比例是根据父标签imgsPlay的width值决定的,
+  以达到自适应效果，窗口缩放时移动距离有偏差这两个bug*/
+  },350)
 }
-
-//事件的区别，普通的方式不能同时添加多个事件函数，会取最后的事件函数；
-//监听机制可以绑定多个事件；
-//鼠标移入画廊;
-function imgsPlay_over(){
-	clearTimeout(timer);
-	but_left.style.opacity=1;
-	but_right.style.opacity=1;
+//点击下面的小圆圈
+//好吧，因为某种复杂的原因，第一个圆圈对应itemArr[2]
+function jump(index){
+  for(var j=0;j<marks.length;j++){
+    marks[j].style.background='none';
+  }
+  marks[index].style.background='white';
 }
-//移出画廊
-function imgsplay_out(){
-	but_left.style.opacity=0;
-	but_right.style.opacity=0;
-	timer=setTimeout(play,speed);
-	this.removeEventListener('mouseover',imgsPlay_over);
-	this.removeEventListener('mouseout',imgsplay_out);
-}
-//监听画廊事件；
-items.addEvent('mouseover',imgsPlay_over,true);
-items.addEvent('mouseout',imgsplay_out,true);
-
-
-//鼠标点击按钮
-function butDown(){
-	this.style.transform='scale(0.8)';
-}
-function butUp(){
-	play(this.derection);
-}
-//鼠标移入按钮
-function butOver(){
-	this.style.opacity=1;
-	this.addEventListener('click',butUp,false);
-	this.addEventListener('mouseout',butOut,false);
-}
-//移出按钮
-function butOut(){
-	this.removeEventListener('mousedown',butDown);
-	this.removeEventListener('mouseup',butUp);
-	this.removeEventListener('mouseout',butOut);
-
-}
-//监听按钮事件
-but_left.derection='left';
-but_right.derection='right';
-but_left.addEventListener('mouseover',butOver,false);
-but_right.addEventListener('mouseover',butOver,false);
-
-for(var i=0;i<imgs.length;i++){
-	imgs[i].small=function(){
-		this.style.transform='scale(1)'+'translateY(0)';
-	};
-	imgs[i].big=function(){
-		this.style.transform='scale(1.2)'+'translateY(-6%)';
-	};
-	imgs[i].addEvent('mouseover',function(){
-		var restyle=this.style.filter;
-		this.style.filter+='contrast(0.6)';
-		this.addEvent('mouseout',function(){
-			this.style.filter=restyle;
-		})
-	},false)
-}
-play();
-function play(derection){
-	clearTimeout(timer);
-	if(!items.hasAttribute('move')){
-		items.setAttribute('move',"");
-	}
-	//contains.offsetWidth的值是随窗口变化的
-	itemWidth=contains.offsetWidth/3;
-	if(derection==='left'){
-		left();
-	}else{
-		right();
-	}
-	
-	timer=setTimeout(play,speed);	
-}
-function left(){
-	if(n===0){
-		n=6;
-		imgs[7].removeAttribute('scale');
-		imgs[7].big();
-		imgs[7].style.filter='brightness(160%)';
-		imgs[7].parentNode.style.zIndex=99;
-		items.removeAttribute('move');
-		items.style.marginLeft= -6* itemWidth+'px';
-		imgs[1].setAttribute('scale','small');
-		imgs[1].small();
-		imgs[1].removeAttribute('scale');
-	}else{
-		n-=1;
-		items.style.marginLeft=-n*itemWidth+'px';
-		imgs[n+2].setAttribute('scale','small');
-		imgs[n+2].small();
-		imgs[n+2].style.filter='brightness(100%)';
-		imgs[n+1].setAttribute('scale','big');
-		imgs[n+1].big();
-		imgs[n+1].style.filter='brightness(160%)';
-
-	}
-	// items.style.marginLeft=items.offsetLeft+itemWidth+'px';
-	// n-=1;
-}
-function right(){
-	if(n===6){
-		n=0;
-		imgs[1].removeAttribute('scale');
-		imgs[1].big();
-		imgs[1].style.filter='brightness(160%)';
-		//关键句，解决imgs[2]覆盖imgs[1]的问题；
-		//元素声明transform时，层级变得很高，兄弟元素同等级别情况下，后来元素居上。
-		//所以这里把imgs[1]的老爸请出来了。此处感谢张鑫旭！
-		imgs[1].parentNode.style.zIndex=99;
-		items.removeAttribute('move');
-		items.style.marginLeft= 0+'px';
-		imgs[7].setAttribute('scale','small');
-		imgs[7].small();
-		imgs[7].removeAttribute('scale');
-	}else{
-		//这里必须用else,否则达不到无缝的效果
-		n+=1;
-		items.style.marginLeft=-n*itemWidth+'px';
-		imgs[n].setAttribute('scale','small');
-		imgs[n].small();
-		imgs[n].style.filter='brightness(100%)';
-		imgs[n+1].setAttribute('scale','big');
-		imgs[n+1].style.filter='brightness(160%)';
-		imgs[n+1].big();
-	}
-	for(var i=0;i<marks.length;i++){
-		marks[i].style.backgroundColor="";
-	}
-	marks[n].style.backgroundColor='#ccc';
+for(var i=0;i<marks.length;i++){
+  (function(index){
+    marks[index].onclick=function(){
+      itemArr[n+1].setAttribute('scale','small');
+      n=index+1;
+      items.style.marginLeft= -((index+1)/3)*100+'%';
+      itemArr[index+2].setAttribute('scale','big');
+      jump(index);
+    }
+  })(i);
 }
 
-window.onresize=function(){
-	clearTimeout(timer);	
-	items.removeAttribute('move');
-	timer=setTimeout(play,500);
+imgsPlay.onmouseover=function(){
+  clearTimeout(timer);
+  leftBut.style.visibility='visible';
+  rightBut.style.visibility='visible'
+}
+imgsPlay.onmouseout=function(){
+  timer=setTimeout(setTimer,speed);
+  leftBut.style.visibility='hidden';
+  rightBut.style.visibility='hidden'
+}
+leftBut.onclick=function(){
+  clearTimeout(timerClick);
+  timerClick=setTimeout(function(){
+    move('left')
+  },300)  //不能小于300ms;因为上面移动时设置了300ms的间距
+}
+rightBut.onclick=function(){
+  clearTimeout(timerClick);
+  timerClick=setTimeout(function(){
+    move('right')
+  },300)
+}
+//窗口失去焦点事件，拖动窗口时也有效果
+window.onblur=function(){
+  clearTimeout(timer);
+  clearTimeout(timerMove);
+  clearTimeout(timersetAttr)
+}
+//打开窗口时设置定时器
+window.onfocus=function(){
+  clearTimeout(timer);
+  timer=setTimeout(setTimer)
 }
