@@ -2,6 +2,9 @@
 	flex: 9;
 	position:relative;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 }
 #container>.contains>.center>.center-contains{
 	max-width: 999px;
@@ -20,6 +23,11 @@
 	width: 40px;
 	color: white;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
+	flex-flow: row;
+	align-items: center;
 	font-size: 40px;
 	font-weight: lighter;
 	background: rgba(0,0,0,0.1);

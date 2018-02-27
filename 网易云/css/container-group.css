@@ -3,11 +3,17 @@
 	margin: 4% 0;
 	overflow: hidden;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	justify-content: space-between;
 }
 #FM>div{
 	flex: 1;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	justify-content: space-around;
 }
 #FM>.add-border{
@@ -16,11 +22,17 @@
 }
 #FM>div>div{
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	flex-flow: row nowrap;
 	align-items: center;
 }
 #FM>div .imgs{
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	width: 50px;
 	padding: 14px;
 	border: 1px solid rgba(10,10,255,0.8);
@@ -45,15 +57,18 @@
 }
 
 
-/*推荐歌单*/ 
+/*推荐歌单*/
 .h{
 	border-bottom: 1px solid #eee;
 	padding: 0 0 10px 0;
 	margin-bottom: -10px;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	justify-content: space-between;
 	font-size: 0.95rem;
-} 
+}
 .more{
 	color: #aaa;
 	font-size: 0.8rem;
@@ -63,18 +78,24 @@
 	margin-top: 50px;
 	width: 100%;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	flex-flow: column nowrap;
 }
 
 #Recom .lists{
 	width: 100%;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	flex-flow: row wrap;
 	justify-content: space-between;
 }
 #Recom .list{
 	flex:0 50px;
-	max-width: 48%; 
+	max-width: 48%;
 	min-width: 18%;
 	margin-top: 20px;
 	flex-flow: row wrap;
@@ -93,6 +114,7 @@
 }
 #Recom .list>span{
 	display: block;
+	margin-top: 5px;
 	flex: auto;
 	width: 100%;
 	overflow:hidden;
@@ -113,17 +135,26 @@
 /*最新音乐*/
 #songs{
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	flex-flow: column nowrap;
 	margin-top: 50px;
 }
 #songs .newsong-list{
 	margin-top: 20px;
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	flex-flow: row wrap;
 	width:100%;
 }
 #songs .newsong-list>div{
 	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 	flex-flow: row wrap;
 	align-items: center;
 	width:50%;

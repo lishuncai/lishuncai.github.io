@@ -1,0 +1,17 @@
+/*弹窗背景*/
+#adjust-pop{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9991;
+	background-color: rgba(10,10,10,0.6);
+	transition: all .5s;
+}
+.coverBg-enter,.coverBg-leave-to{
+	opacity: 0;
+}
+.coverBg-enter-to,.converBg-leave{
+	opacity: 1;
+}

@@ -1,6 +1,11 @@
 #footer{
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -moz-flex;
   flex-flow: row nowrap;
+  background-color: white;
+  z-index: 9990;
 }
 #footer .cover{
   width: 60px;

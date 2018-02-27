@@ -6,7 +6,7 @@ var leftBut=imgsPlay.querySelector('.leftBut'),
 var items=imgsPlay.querySelector('#items');
     items.move=true;
 var itemArr=items.querySelectorAll('.item');
-    itemArr[1].setAttribute('scale','big');
+    itemArr[1].setAttribute('scale','big');//受其他进程影响，这里会报错，事实上这里不会有错的
 var marks=imgsPlay.querySelectorAll('.marks >span');
 var timer;  //定时器；
 var n=0;  //系数；
@@ -18,6 +18,7 @@ var timerClick;   //点击定时器，用来限制点击之间
 //将定时器和运动函数分离，方便扩张
 L=itemArr.length-3;
 items.setAttribute('move','');
+setTimer();
 function setTimer(){
   clearTimeout(timer);
   timer=setTimeout(setTimer,speed);
@@ -36,7 +37,6 @@ function move(dir){
       itemArr[1].setAttribute('transform','');
       items.style.marginLeft= -(n/3)*100+'%';
     }
-
     n++;
   }
   if(dir==='left'){
@@ -51,7 +51,7 @@ function move(dir){
     }
     n--;
   }
-  //恢复上面移除的属性，设置时间间隔不小于300ms,
+  //恢复上面移除的属性，设置时间间隔不小于200ms,
   //避免恢复属性后因时间间隔过短影响上面的属性取消操作；
   if(items.move===false){
     //items.move=false时表示已经替换位置了
@@ -68,7 +68,7 @@ function move(dir){
         itemArr[L+1].setAttribute('scale','small');
         itemArr[1].setAttribute('scale','small');
       }
-    },300)
+    },200)
   }
   function scaleRight(){
     itemArr[n+1].setAttribute('scale','big');
@@ -82,20 +82,20 @@ function move(dir){
   timerMove=setTimeout(function(){
     if(dir==='left'){
       scaleLeft();
-      jump(n)
+      markJump(n)
     }
     if(dir==='right'){
       scaleRight();
-      jump(n-1);
+      markJump(n-1);
     }
   items.style.marginLeft= -(n/3)*100+'%';
   /* 除以3是因为margin-left比例是根据父标签imgsPlay的width值决定的,
   以达到自适应效果，窗口缩放时移动距离有偏差这两个bug*/
-  },350)
+  },200)
 }
 //点击下面的小圆圈
 //好吧，因为某种复杂的原因，第一个圆圈对应itemArr[2]
-function jump(index){
+function markJump(index){
   for(var j=0;j<marks.length;j++){
     marks[j].style.background='none';
   }
@@ -108,7 +108,7 @@ for(var i=0;i<marks.length;i++){
       n=index+1;
       items.style.marginLeft= -((index+1)/3)*100+'%';
       itemArr[index+2].setAttribute('scale','big');
-      jump(index);
+      markJump(index);
     }
   })(i);
 }
@@ -123,26 +123,34 @@ imgsPlay.onmouseout=function(){
   leftBut.style.visibility='hidden';
   rightBut.style.visibility='hidden'
 }
-leftBut.onclick=function(){
+
+function cut(dir){
   clearTimeout(timerClick);
   timerClick=setTimeout(function(){
-    move('left')
-  },300)  //不能小于300ms;因为上面移动时设置了300ms的间距
+    move(dir);
+  },200)
+}
+leftBut.onclick=function(){
+  cut('left')  //不能小于200ms;因为上面移动时设置了200ms的间距
 }
 rightBut.onclick=function(){
-  clearTimeout(timerClick);
-  timerClick=setTimeout(function(){
-    move('right')
-  },300)
+  cut('right')
 }
-//窗口失去焦点事件，拖动窗口时也有效果
-window.onblur=function(){
-  clearTimeout(timer);
-  clearTimeout(timerMove);
-  clearTimeout(timersetAttr)
+//鼠标滚轮事件
+function wheel(e,value){
+  e=e||window.event;
+  if(e.wheelDelta){
+    value=e.wheelDelta/120
+  }else if(e.detail){
+    value=-e.detail/3
+  }
+  if(value<0){
+    cut('right')
+  }else{
+    cut('left')
+  }
+  e.preventDefault();
+  e.stopPropagation();
 }
-//打开窗口时设置定时器
-window.onfocus=function(){
-  clearTimeout(timer);
-  timer=setTimeout(setTimer)
-}
+items.onmousewheel=wheel;
+items.addEventListener('DOMMouseScroll',wheel,false);

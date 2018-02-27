@@ -1,4 +1,59 @@
-//轮播图；
+// aside过渡
+var show={
+	Bg:false,
+	adjust:false,
+	aside:false,
+	songList:false
+}
+//aside 列表内容
+var asideContent=[
+	{
+		title:'搜索',
+		icon:'imgs/SVG/search.svg'
+	},
+	{
+		title:'发现音乐',
+		icon:'imgs/SVG/music-note.svg'
+	},
+	{
+		title:'最近播放',
+		icon:'imgs/SVG/time.svg'
+	},
+	{
+		title:'下载管理',
+		icon:'imgs/SVG/download.svg'
+	},
+	{
+		title:'我的电台',
+		icon:'imgs/SVG/电台.svg'
+	},
+	{
+		title:'我的收藏',
+		icon:'imgs/SVG/collection.svg'
+	}
+]
+var asideTodos=[
+	{
+		title:'我喜欢的音乐',
+		icon:'imgs/SVG/like.svg',
+		switchIcon:'',
+		showManage:false
+	}
+]
+function storage(){
+	var asideTodosJson=JSON.stringify(asideTodos);
+	localStorage.setItem("asideTodos",asideTodosJson);
+}
+window.onload=function(){
+	if(localStorage.getItem("asideTodos")){
+		var asideTodosJson=localStorage.getItem("asideTodos");
+		app.asideTodos=JSON.parse(asideTodosJson);
+	}else{
+		return
+	}
+
+}
+//轮播图图片；
 var imgs=[];
 for(var i=0;i<6;i++){
 	var url='background-image:url(imgs/轮播图/'+i+'.jpg)';
@@ -6,6 +61,7 @@ for(var i=0;i<6;i++){
 }
 //重复三张图片
 imgs.push(imgs[0],imgs[1],imgs[2]);
+
 //栏目
 var Groups=[
 {head:'推荐歌单', cla:'Recom',name:'Recom'},
@@ -15,6 +71,7 @@ var Groups=[
 {head:'主播电台', cla:'radio',name:'radio'}
 ];
 var Groups_content=[listDetails,listDetails];
+
 //推荐歌单
 var dec=[
 	'幻想净琉璃',
@@ -52,7 +109,6 @@ var newestSong={
 		var g=Math.floor(Math.random()*256);
 		var b=Math.floor(Math.random()*256);
 		return 'rgb('+r+','+g+','+b+')';
-
 	},
 	songname:[],
 	author:[]
@@ -112,7 +168,7 @@ Vue.component('songs',{
 			}
 		}
 	})
-var imgbg=imgs[0];
+
 var app=new Vue({
 	el:"#musicApp",
 	data:{
@@ -120,6 +176,77 @@ var app=new Vue({
 		Groups:Groups,
 		listDetails:listDetails,
 		newsong:newestSong,
-		change:false
+		asideContent:asideContent,
+		listTitle:'',
+		listicon:'',
+		asideTodos:asideTodos,
+		show:show,
+		index:'',
+		listManage:false,
+		listRebuild:false
+	},
+	methods:{
+		newList:function(){
+			if(this.listTitle){
+				this.asideTodos.push({
+					title:this.listTitle,
+					icon:'imgs/SVG/music_playlist.svg',
+					switchIcon:'imgs/SVG/switch.svg',
+					showManage:false
+				})
+				asideTodos=this.asideTodos
+				this.listTitle=''
+			}else{
+				return
+			}
+		},
+		submit:function(){
+			if(this.listRebuild){
+				this.asideTodos[this.index].title=this.listTitle
+				this.listTitle=''
+				this.listRebuild=false
+			}else{
+				this.newList()
+			}
+			this.toggle()
+			storage()
+		},
+		rebuild:function(obj,index){
+			this.asideTodos[index].showManage=false
+			if(index){
+				this.listRebuild=true
+				this.index=index
+				this.toggle(obj)
+			}
+		this.listManage=!this.listManage
+		},
+		remove:function(index){
+			if(index){
+				this.asideTodos.splice(index,1)
+				storage()
+			}
+		},
+		toggle:function(obj){
+			if(obj){
+				this.show[obj]=!this.show[obj]
+				this.show.Bg=!this.show.Bg
+			}else{
+				for(var i of Object.keys(this.show)){
+					this.show[i]=false
+				}
+			}
+		},
+		//管理歌单
+		edit:function(index){
+			if(!index)return
+			if(this.asideTodos[index].showManage){
+				this.asideTodos[index].showManage=false
+			}else{
+				for(var i=0;i<this.asideTodos.length;i++){
+					this.asideTodos[i].showManage=false
+				}
+				this.asideTodos[index].showManage=true
+			}
+		},
 	}
 });

@@ -1,12 +1,20 @@
-@media all and (max-width:760px){
+@media all and (max-width:650px){
 	html{
 		font-size: 14px;
 	}
-	#container .aside{
-		display: none;
+	#header{
+		z-index: 9990;
+	}
+	#container{
+		position: relative;
+	}
+	.myMusic-list{
+		width: 100%;
 	}
 	#imgsPlay{
-		margin-top:25%;
+		margin-top: 25%;
+		margin-left: -2px;
+		width: 104%;
 		transform: scale(2.5);/*2.5X1.2=3*/
 	}
 	#imgsPlay .marks{
@@ -22,6 +30,9 @@
 		flex-flow: row wrap;
 		justify-content: center;
 		width: 100px;
+	}
+	#FM>div .content{
+		margin-top: 10px;
 	}
 	#FM>div .content>span:last-child{
 		display: none;
@@ -54,5 +65,23 @@
 		border-right: none;
 		background-color: rgba(200,200,200,0.1)
 	}
-
+}
+@media all and (max-width:420px){
+	#container{
+		display: flex;
+		width: 100%;
+	}
+	#container .contains{
+		position: relative;
+		flex: 0 0 100vw;
+		margin-right: 0;
+	}
+	.myMusic-list{
+		height: 100%;
+		flex: 0 0 100vw;
+	}
+	.change-list .list{
+		width: 100%;
+		height: 100%;
+	}
 }
