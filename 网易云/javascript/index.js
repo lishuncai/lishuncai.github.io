@@ -25,7 +25,7 @@ var asideContent=[
 	},
 	{
 		title:'我的电台',
-		icon:'imgs/SVG/电台.svg'
+		icon:'imgs/SVG/radio.svg'
 	},
 	{
 		title:'我的收藏',
