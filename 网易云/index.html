@@ -109,7 +109,7 @@
 				<dl>
 					<br>
 					<dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
-							<embed :src="item.icon" />
+							<embed :src="item.icon" type="image/svg+xml"/>
 							<span>{{item.title}}</span>
 					</dd>
 					<dt class='myList'>
