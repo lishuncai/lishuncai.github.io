@@ -1,0 +1,29 @@
+#footer{
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  flex-flow: row nowrap;
+  background-color: white;
+  z-index: 9990;
+}
+#footer .cover{
+  width: 60px;
+  height: 60px;
+  background-color: grey;
+}
+#footer .controls{
+
+  height: 100%;
+}
+#footer .controls>div{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color:grey;
+  margin: 5px;
+}
+#footer .time{
+  background-color: grey;
+  width:50%;
+}
