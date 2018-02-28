@@ -11,7 +11,7 @@
 			display: block;
 			margin:0 auto;
 		}
-		body>div{
+		body div{
 			display: block;
 			margin: 0 auto;
 			text-align: center;
@@ -56,13 +56,16 @@
 			background:#BC2F2E;
 			
 		}
+		.controls-buts{
+			width:50%;
+		}
 	</style>
 </head>
 <body>
 	<canvas id='canvas'></canvas>
 	<div><input id='audio' type="file" name="" accept="audio/*"></div>
 	<div>
-		<input id='range' step='1' type="range" value='30' min='0' max='100'>
+		<input id='range' step='1' type="range" value='80' min='0' max='100'>
 		<span id='num'></span>
 	</div>
 	<div class='controls-time'>
@@ -72,6 +75,10 @@
 			</div>
 			<div class='duration-red'></div>
 		</div>
+	</div>
+	<div class='controls-buts'> 
+		<button class='resume'>播放</button>
+		<button class='suspend'>暂停</button>
 	</div>
 	
 	<!--[if IE]>
@@ -120,7 +127,7 @@
 			 			bufferSource=ac.createBufferSource();
 			 			bufferSource.buffer=buffer;
 			 			times=bufferSource.buffer.duration;
-			 			size=analyser.frequencyBinCount;
+			 			size=analyser.frequencyBinCount-4;
 			 			bufferSource.connect(analyser);
 			 			bufferSource.start(0,when,bufferSource.buffer.duration);
 			 			source=bufferSource;
@@ -132,7 +139,7 @@
 							})
 						}
 						draw();
-
+						volume(range.value/100);
 						playDuration(when);
 						sliding();
 			 		},function(err){
@@ -166,7 +173,7 @@
 				canvasCtx.fillStyle='rgba(0,0,0,0.2)';
 				canvasCtx.fillRect((i)*width,canvas.height/2,width/2,arr[i]*0.1);
 
-				Hots[i].y+=0.2;
+				Hots[i].y+=0.18;
 				if(Hots[i].y<0){
 					Hots[i].y=0;
 				}
@@ -180,6 +187,8 @@
 			}
 			animationFrame=window.requestAnimationFrame(draw);
 		}
+
+
 //调整音量
 		var range=document.querySelector('#range');
 		range.addEventListener('change',function(){
@@ -189,10 +198,13 @@
 			gainNode.gain.value=num;
 			shownum.innerHTML=Math.floor(num*100);
 		}
+
+
 //进度条播放
 		function playDuration(when){
 			if(ac.currentTime && when+ac.currentTime>=times){
 				circles.style.left=0+'px';
+				durationRed.style.width=0;
 				window.cancelAnimationFrame(animationFrame);
 				console.log('播放完成');
 				ac.close();
@@ -209,8 +221,6 @@
 				bufferSource.buffer.duration 的值，神奇的bug！！！*/
 			}	
 		}
-
-
 
 //滑动进度条,跳播
 		function acRebuild(when){
@@ -234,11 +244,14 @@
 			function move(e){
 				e=e||window.event;
 				L=e.clientX-duration.offsetLeft;
-				circles.style.left=L+'px';
+				
 				if(L<0){
-					circles.style.left=0+'px'
+					circles.style.left=0+'px';
+					L=0
 				}else if(L>duration.offsetWidth){
-					circles.style.left=duration.offsetWidth+'px'
+					circles.style.left=duration.offsetWidth+'px';
+				}else{
+					circles.style.left=L+'px';
 				}
 			}
 			function up(){
@@ -267,7 +280,20 @@
 			}
 			//duration.addEventListener('mousedown',jump,false)
 		}
-		
+
+
+		var resume=document.querySelector('.resume');
+		var suspend=document.querySelector('.suspend');
+		resume.onclick=function(){
+			ac.resume().then(function(){
+				console.log('已恢复')
+			})
+		}
+		suspend.onclick=function(){
+			ac.suspend().then(function(){
+				console.log('暂停')
+			});
+		}
 	</script>
 </body>
 </html>

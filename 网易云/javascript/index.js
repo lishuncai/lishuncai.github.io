@@ -183,7 +183,10 @@ var app=new Vue({
 		show:show,
 		index:'',
 		listManage:false,
-		listRebuild:false
+		listRebuild:false,
+		play: false,
+		full: true,
+		canvas: false
 	},
 	methods:{
 		newList:function(){

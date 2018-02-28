@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="css/调整栏目.css">
 	<link rel="stylesheet" href="css/aside.css">
 	<link rel="stylesheet" href="css/footer.css">
-	
+
 </head>
 <body>
 	<!-- 最新音乐组件 -->
@@ -39,7 +39,7 @@
 		 <!-- 弹窗背景 -->
 		 <transition name='coverBg'>
 				 <div id='adjust-pop'
-					 v-if='show.Bg' 
+					 v-if='show.Bg'
 					 v-cloak
 					 @click="toggle()">
 				 </div>
@@ -136,7 +136,9 @@
 			</div>
 	 		<div class="contains">
 	 			<div class="top">
-	 				<div class="tip">发现音乐</div>
+	 				<div class="tip">
+						<input id='audio' type="file" name="" accept="audio/*">
+					</div>
 	 				<div class="tab">
 	 					<p>
 	 						<span>个性推荐</span>
@@ -221,23 +223,62 @@
 	 			</div>
 	 		</div>
 	 	</div>
+<!-- footer -->
 	 	<div id="footer">
-			<div class='cover'>
-				<div>图片</div>
+			<canvas id='canvas' ></canvas>
+			<!-- <div class='song-pic' @click="full=!full">
+				<img
+					src="imgs/图标/icons/fullscreen.png"
+					alt="全屏"
+					v-if="full"
+					key="full">
+				<img
+					src="imgs/图标/icons/narrow.png"
+					alt="缩小"
+					v-else
+					key="narrow">
+			</div> -->
+	<!-- 控件 -->
+			<div class="controls"  >
+				<div class='last' v-cloak>
+					<img src="imgs/图标/icons/last.png" alt="last" >
+				</div>
+				<div class='play' @click="play=!play" v-cloak>
+					<img
+						class='suspend'
+						src="imgs/图标/icons/suspend.png"
+						v-show="play">
+					<img
+						class='resume'
+						src="imgs/图标/icons/play.png"
+						v-show="!play">
+				</div>
+				<div class='next' v-cloak>
+					<img src="imgs/图标/icons/next.png" alt="next">
+				</div>
 			</div>
-			<div class='controls'>
-				<div class='last'></div>
-				<div ></div>
-				<div class='next'></div>
+	<!-- 进度条 -->
+			<div class="music-viwe">
+				<div class='controls-time'>
+					<div class='duration'>
+						<div class='circles'>
+							<div class='circles-center'></div>
+						</div>
+						<div class='duration-red'></div>
+					</div>
+				</div>
 			</div>
-			<div class='time'>
-				<div></div>
-			</div>
+			<!-- <div class="noise">
+				<input id='range' step='1' type="range" value='30' min='0' max='100'>
+				<span id='num'></span>
+			</div> -->
+	<!-- 选择文件 -->
 	 	</div>
 	 </div>
-	<script src="javascript/vue.js"></script>	 
+	 <script src="javascript/vue.js"></script>
 	 <script src="javascript/index.js"></script>
 	 <script src="javascript/图片轮播.js"></script>
 	 <script src="javascript/touch事件.js"></script>
+	 <script src="javascript/播放控件.js"></script>
 </body>
 </html>

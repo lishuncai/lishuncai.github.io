@@ -20,8 +20,8 @@ function addTouch(obj){
   function handleMove(e){
     var touch=e.targetTouches[0];
     left=obj.offsetLeft;
-    moveX=Math.ceil(touch.clientX-x);
-    obj.style.left=obj.offsetLeft+moveX/10+'px';//除以10可让过度更平缓
+    moveX=touch.clientX-x;
+    obj.style.left=obj.offsetLeft+moveX/4+'px';//除以10可让过度更平缓
     if(obj.offsetLeft>0){
       obj.style.left=0
     }else if(obj.offsetLeft<-width){
