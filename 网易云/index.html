@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="css/调整栏目.css">
 	<link rel="stylesheet" href="css/aside.css">
 	<link rel="stylesheet" href="css/footer.css">
-
+	
 </head>
 <body>
 	<!-- 最新音乐组件 -->
@@ -23,7 +23,7 @@
 				<span class='more'>更多 &gt;</span>
 			</p>
 			<div class='newsong-list'>
-				<div v-for='i in 10'>
+				<div v-for='i in 10' v-cloak>
 					<div>{{String(i).length>1?i:'0'+i}}</div>
 					<div :style='colorBlock()' class='colorBlock'></div>
 					<div>
@@ -39,14 +39,15 @@
 		 <!-- 弹窗背景 -->
 		 <transition name='coverBg'>
 				 <div id='adjust-pop'
-					 v-if='show.Bg'
+					 v-if='show.Bg' 
+					 v-cloak
 					 @click="toggle()">
 				 </div>
 		 </transition>
 		 <!-- 新建歌单弹窗 -->
 		 <!-- 被逼无奈提到前面，chrome和firefox浏览器，放在aside中时，可能重新渲染的关系（v-if或v-show)，会受aside样式的影响，比如aside不被渲染时（响应式），此弹窗会消失；aside 的z-index会影响到弹窗的z-index;而edge则不会。想想还是分离比较好 -->
-		 <transition name='fade-songList'>
-			 <div class='songList' v-if="show.songList">
+		 <transition name='fade-songList' >
+			 <div class='songList' v-if="show.songList" v-cloak>
 				 <form>
 					 <legend>编辑歌单标题</legend>
 					 <br>
@@ -80,8 +81,8 @@
 			</div>
 	 		<div class='title'>网易云音乐</div>
 	 	</div>
-		<transition name='fade-aside' >
-			<div id='aside' v-if='show.aside'>
+		<transition name='fade-aside'>
+			<div id='aside' v-if='show.aside' v-cloak>
 				<div class="aside-menu"  >
 					<div class='menu'>
 						<div class='menu-header'>
@@ -109,8 +110,8 @@
 				<dl>
 					<br>
 					<dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
-							<embed :src="item.icon" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
-							<span>{{item.title}}</span>
+							<object :data="item.icon" type="image/svg+xml" ></object>
+							<span v-cloak>{{item.title}}</span>
 					</dd>
 					<dt class='myList'>
 						<span>我的歌单</span>
@@ -120,13 +121,13 @@
 					</dt>
 					<!-- 我的歌单 -->
 					<dd v-for='(item,index) in asideTodos' :key='index' class='myNewList'>
-						<embed :src="item.icon" type="image/svg+xml">
+						<object :data="item.icon" type="image/svg+xml"></object>
 						<span>{{item.title}}</span>
 						<div class="switchIcon">
 							<div @click="edit(index)"></div>
-							<embed :src="item.switchIcon" type="image/svg+xml"/>
+							<object :data="item.switchIcon" type="image/svg+xml"></object>
 						</div>
-						<div class="listManage" v-if="item.showManage">
+						<div class="listManage" v-if="item.showManage" v-cloak>
 							<span @click="remove(index)">删除</span>
 							<span @click="rebuild('songList',index)">编辑</span>
 						</div>
@@ -207,8 +208,8 @@
 							</div>
  						</div>
 	 				</div>
- 					<transition name='fade-adiust'>
-						<div class='list-change' v-if='show.adjust'>
+ 					<transition name='fade-adiust' >
+						<div class='list-change' v-if='show.adjust' v-cloak>
 							<p>调整栏目顺序
 								<span>x</span>
 							</p>
@@ -234,7 +235,7 @@
 			</div>
 	 	</div>
 	 </div>
-	 <script src="javascript/vue.js"></script>
+	<script src="javascript/vue.js"></script>	 
 	 <script src="javascript/index.js"></script>
 	 <script src="javascript/图片轮播.js"></script>
 	 <script src="javascript/touch事件.js"></script>
