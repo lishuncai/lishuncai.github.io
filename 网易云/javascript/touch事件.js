@@ -8,6 +8,7 @@ function addTouch(obj){
   var left;
   obj.addEventListener('touchstart',handleStart,false);
   function handleStart(e){
+    obj.style.transition='';
     if(e.targetTouches.length=1){
       var touch=e.targetTouches[0];
       x=touch.clientX;
@@ -21,7 +22,7 @@ function addTouch(obj){
     var touch=e.targetTouches[0];
     left=obj.offsetLeft;
     moveX=touch.clientX-x;
-    obj.style.left=obj.offsetLeft+moveX/4+'px';//除以10可让过度更平缓
+    obj.style.left=obj.offsetLeft+moveX/10+'px';//除以10可让过度更平缓
     if(obj.offsetLeft>0){
       obj.style.left=0
     }else if(obj.offsetLeft<-width){
@@ -30,9 +31,10 @@ function addTouch(obj){
   }
   function handleEnd(){
     var offsetLeft=obj.offsetLeft;
-    if(obj.offsetLeft<-width/2){
+    obj.style.transition='all .1s ease';
+    if(obj.offsetLeft<-width/3){
       obj.style.left=-width+'px'
-    }else if(obj.offsetLeft>=-width/2){
+    }else if(obj.offsetLeft>=-width/3){
       obj.style.left=0;
     }
     obj.removeEventListener('touchmove',handleMove);

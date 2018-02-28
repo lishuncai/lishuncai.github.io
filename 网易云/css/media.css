@@ -7,7 +7,6 @@
 	}
 	#container{
 		position: relative;
-		transition: all .1s linear;
 	}
 	.myMusic-list{
 		width: 100%;
