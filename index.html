@@ -110,7 +110,7 @@
 				<dl>
 					<br>
 					<dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
-							<embed src="item.icon" type="image/svg+xml" >
+							<embed :src="item.icon" type="image/svg+xml" >
 							<span v-cloak>{{item.title}}</span>
 					</dd>
 					<dt class='myList'>
@@ -121,11 +121,11 @@
 					</dt>
 					<!-- 我的歌单 -->
 					<dd v-for='(item,index) in asideTodos' :key='index' class='myNewList'>
-						<embed src="item.icon" type="image/svg+xml" >
+						<embed :src="item.icon" type="image/svg+xml" >
 						<span>{{item.title}}</span>
 						<div class="switchIcon">
 							<div @click="edit(index)"></div>
-							<embed src="item.switchIcon" type="image/svg+xml" >
+							<embed :src="item.switchIcon" type="image/svg+xml" >
 						</div>
 						<div class="listManage" v-if="item.showManage" v-cloak>
 							<span @click="remove(index)" v-cloak>删除</span>
