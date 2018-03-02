@@ -1,4 +1,4 @@
-// aside过渡
+ // aside过渡
 var show={
 	Bg:false,
 	adjust:false,
@@ -193,8 +193,8 @@ var app=new Vue({
 			if(this.listTitle){
 				this.asideTodos.push({
 					title:this.listTitle,
-					icon:'imgs/svg/music_playlist.svg',
-					switchIcon:'imgs/svg/switch.svg',
+					icon:'./imgs/SVG/music_playlist.svg',
+					switchIcon:./'imgs/SVG/switch.svg',
 					showManage:false
 				})
 				asideTodos=this.asideTodos
