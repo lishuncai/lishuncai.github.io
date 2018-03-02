@@ -9,33 +9,33 @@ var show={
 var asideContent=[
 	{
 		title:'搜索',
-		icon:'imgs/svg/search.svg'
+		icon:'./imgs/svg/search.svg'
 	},
 	{
 		title:'发现音乐',
-		icon:'imgs/svg/music-note.svg'
+		icon:'./imgs/svg/music-note.svg'
 	},
 	{
 		title:'最近播放',
-		icon:'imgs/svg/time.svg'
+		icon:'./imgs/svg/time.svg'
 	},
 	{
 		title:'下载管理',
-		icon:'imgs/svg/download.svg'
+		icon:'./imgs/svg/download.svg'
 	},
 	{
 		title:'我的电台',
-		icon:'imgs/svg/radio.svg'
+		icon:'./imgs/svg/radio.svg'
 	},
 	{
 		title:'我的收藏',
-		icon:'imgs/svg/collection.svg'
+		icon:'./imgs/svg/collection.svg'
 	}
 ]
 var asideTodos=[
 	{
 		title:'我喜欢的音乐',
-		icon:'imgs/svg/like.svg',
+		icon:'./imgs/svg/like.svg',
 		switchIcon:'',
 		showManage:false
 	}
