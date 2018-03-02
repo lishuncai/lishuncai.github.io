@@ -63,7 +63,6 @@ canvas{
 }
 /* 进度条长度 */
 #footer .controls-time{
-  width: 80%;
   height: 10px;
   margin: 0 20px;
 }
