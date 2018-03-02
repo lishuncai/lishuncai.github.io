@@ -165,11 +165,14 @@ function acRebuild(when){
 
 function sliding(){
   var L;
+  var touch;
   //拖动圆圈
-  function move(e){
+  function move(e,touch){
     e=e||window.event;
-    L=e.clientX-duration.offsetLeft;
-
+    if(touch){
+      e=touch;
+    }
+    var L=Math.floor(e.clientX)-duration.offsetLeft;
     if(L<0){
       circles.style.left=0+'px';
       L=0
@@ -180,15 +183,24 @@ function sliding(){
     }
   }
   function up(){
+    var L=circles.offsetLeft;
     var when=L /duration.offsetWidth *bufferSource.buffer.duration;
-      acRebuild(when);//重新建立音频环境
-      document.body.removeEventListener('mousemove',move);
-      document.body.removeEventListener('mouseup',up)
+    acRebuild(when);//重新建立音频环境
+    document.body.removeEventListener('mousemove',move);
+    document.body.removeEventListener('mouseup',up);    
   }
-  function down(e){
+  function down(e,touch){
     window.cancelAnimationFrame(circlesAnimation);
     document.body.addEventListener('mousemove',move,false);
     document.body.addEventListener('mouseup',up,false);
+    document.body.addEventListener('touchmove',function(e){
+      touch=e.targetTouches[0];
+      move(e,touch)
+    },false);
+    document.body.addEventListener('touchend',function(e){
+      touch=e.targetTouches[0];
+      up(e,touch)
+    },false); 
   }
   circles.onmousedown=function(e){
     e=e||window.event;
@@ -196,12 +208,18 @@ function sliding(){
     e.stopPropagation();
     e.preventDefault();
   };
+  circles.ontouchstart=function(e){
+    var touch=e.targetTouches[0];
+    down(e,touch);
+    e.stopPropagation();
+    e.preventDefault();
+  }
   //点击进度条
   controlsTime.onmousedown=function(e){
     e=e||window.event;
     window.cancelAnimationFrame(circlesAnimation);
     circles.style.left=e.clientX-duration.offsetLeft+'px';
-    var when=(e.clientX-duration.offsetLeft)
+    var when=(Math.floor(e.clientX)-duration.offsetLeft)
       /duration.offsetWidth
       *bufferSource.buffer.duration;
     acRebuild(when);
