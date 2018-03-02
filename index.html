@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -110,7 +110,7 @@
 				<dl>
 					<br>
 					<dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
-							<object data="./imgs/SVG/music-note.svg" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/install/"></object>
+							<object :data="item.icon" type="image/svg+xml" ></object>
 							<span v-cloak>{{item.title}}</span>
 					</dd>
 					<dt class='myList'>
@@ -121,7 +121,7 @@
 					</dt>
 					<!-- 我的歌单 -->
 					<dd v-for='(item,index) in asideTodos' :key='index' class='myNewList'>
-						<object :data="item.icon" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/install/"></object>
+						<object :data="item.icon" type="image/svg+xml" ></object>
 						<span>{{item.title}}</span>
 						<div class="switchIcon">
 							<div @click="edit(index)"></div>
