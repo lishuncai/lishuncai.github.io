@@ -72,7 +72,7 @@
 				 </form>
 			 </div>
 		 </transition>
-<!-- header -->
+ <!-- header -->
 	 	<div id='header'>
 	 		<div class='menu-but' @click="toggle('aside')">
 				<div></div>
@@ -110,7 +110,7 @@
 				<dl>
 					<br>
 					<dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
-							<object :data="item.icon" type="image/svg+xml"></object>
+							<object :data="item.icon" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/install/"></object>
 							<span v-cloak>{{item.title}}</span>
 					</dd>
 					<dt class='myList'>
