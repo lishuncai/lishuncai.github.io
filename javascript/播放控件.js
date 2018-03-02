@@ -58,6 +58,7 @@ function build(reader,when){
         playDuration(when);
         sliding();
       },function(err){
+        alert('请选择音频文件');
         console.error(err);
       })
     }
