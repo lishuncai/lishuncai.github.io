@@ -13,9 +13,12 @@ var circlesAnimation;
 var range=document.querySelector('#range');
 var shownum=document.querySelector('#num');
 var fileLoadResolve=false;
+
 audioInput.onchange=function(){
-  source && source.stop();
-   if(audio.files!==0){
+  if(!audio.files[0]){
+    return
+  }else if(audio.files.length!==0){
+    source && source.stop();
     var file=audio.files[0];
     var reader=new FileReader();
     reader.readAsArrayBuffer(file);
@@ -122,7 +125,9 @@ function playDuration(when){
     circles.style.left=0+'px';
     durationRed.style.width=0;
     window.cancelAnimationFrame(animationFrame);
+    canvasCtx.clearRect(0,0,canvas.width,canvas.height);
     console.log('播放完成');
+    app.play=false;
     ac.close();
   }else{
     var time=Math.floor((when+ac.currentTime)/times *duration.offsetWidth);

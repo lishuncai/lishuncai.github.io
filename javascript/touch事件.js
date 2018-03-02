@@ -19,6 +19,8 @@ function addTouch(obj){
     }
   }
   function handleMove(e){
+    e.preventDefault();
+    e.stopPropagation();
     var touch=e.targetTouches[0];
     left=obj.offsetLeft;
     moveX=touch.clientX-x;
