@@ -96,7 +96,7 @@
 						<div><span>附近的人</span></div>
 						<div><span>个性皮肤</span></div>
 						<div><span>听歌识曲</span></div>
-						<div><span>定时停止播放</span></div>
+ 						<div><span>定时停止播放</span></div>
 						<div><span>扫一扫</span></div>
 						<div><span>音乐闹钟</span></div>
 						<div><span>驾驶模式</span></div>
@@ -121,7 +121,7 @@
 					</dt>
 					<!-- 我的歌单 -->
 					<dd v-for='(item,index) in asideTodos' :key='index' class='myNewList'>
-						<object :data="item.icon" type="image/svg+xml" ></object>
+						<object :data="item.icon" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/install/"></object>
 						<span>{{item.title}}</span>
 						<div class="switchIcon">
 							<div @click="edit(index)"></div>
