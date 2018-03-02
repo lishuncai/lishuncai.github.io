@@ -1,18 +1,19 @@
 var audioInput=document.getElementById('audio');
-var ac;
-var gainNode;
-var analyser;
-var ArrayBuffer;
-var bufferSource;
-var source;
+var ac;//音频环境
+var gainNode;//音量节点
+var analyser;//分析节点
+var ArrayBuffer;//
+var bufferSource;//音源缓冲
+var source;//音源缓冲
 var size;
-var Hots=[];
+var Hots=[];//柱子上的帽子
 var times;
 var animationFrame;
-var circlesAnimation;
+var circlesAnimation;//进度条动画
 var range=document.querySelector('#range');
 var shownum=document.querySelector('#num');
 var fileLoadResolve=false;
+var count=0;
 
 audioInput.onchange=function(){
   if(!audio.files[0]){
@@ -32,6 +33,7 @@ audioInput.onchange=function(){
 }
 
 function build(reader,when){
+      var n= ++count;
       ac=new (window.AudioContext||window.webkitAudioContext||window.mozAudioContext)();
       // gainNode=ac.createGain();
       // gainNode.connect(ac.destination);
@@ -42,6 +44,7 @@ function build(reader,when){
       ArrayBuffer=reader.result;
 
       ac.decodeAudioData(ArrayBuffer,function(buffer){
+        if(n != count)return;
         bufferSource=ac.createBufferSource();
         bufferSource.buffer=buffer;
         times=bufferSource.buffer.duration;
@@ -162,6 +165,7 @@ function acRebuild(when){
 
 function sliding(){
   var L;
+  //拖动圆圈
   function move(e){
     e=e||window.event;
     L=e.clientX-duration.offsetLeft;
@@ -177,7 +181,7 @@ function sliding(){
   }
   function up(){
     var when=L /duration.offsetWidth *bufferSource.buffer.duration;
-      acRebuild(when);
+      acRebuild(when);//重新建立音频环境
       document.body.removeEventListener('mousemove',move);
       document.body.removeEventListener('mouseup',up)
   }
@@ -192,17 +196,21 @@ function sliding(){
     e.stopPropagation();
     e.preventDefault();
   };
+  //点击进度条
   controlsTime.onmousedown=function(e){
     e=e||window.event;
     window.cancelAnimationFrame(circlesAnimation);
-    var when=(e.clientX-duration.offsetLeft)/duration.offsetWidth*bufferSource.buffer.duration;
+    circles.style.left=e.clientX-duration.offsetLeft+'px';
+    var when=(e.clientX-duration.offsetLeft)
+      /duration.offsetWidth
+      *bufferSource.buffer.duration;
     acRebuild(when);
     e.preventDefault();
   }
   //duration.addEventListener('mousedown',jump,false)
 }
 
-
+//暂停与播放
 var resume=document.querySelector('.resume');
 var suspend=document.querySelector('.suspend');
 resume.onclick=function(){
