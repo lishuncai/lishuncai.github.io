@@ -4,7 +4,7 @@ var show={
 	adjust:false,
 	aside:false,
 	songList:false
-}
+} 
 //aside 列表内容
 var asideContent=[
 	{
@@ -13,29 +13,29 @@ var asideContent=[
 	},
 	{
 		title:'发现音乐',
-		icon:'./imgs/svg/music-note.svg'
+		icon:'./imgs/SVG/music-note.svg'
 	},
 	{
 		title:'最近播放',
-		icon:'./imgs/svg/time.svg'
+		icon:'./imgs/SVG/time.svg'
 	},
 	{
 		title:'下载管理',
-		icon:'./imgs/svg/download.svg'
+		icon:'./imgs/SVG/download.svg'
 	},
 	{
 		title:'我的电台',
-		icon:'./imgs/svg/radio.svg'
+		icon:'./imgs/SVG/radio.svg'
 	},
 	{
 		title:'我的收藏',
-		icon:'./imgs/svg/collection.svg'
+		icon:'./imgs/SVG/collection.svg'
 	}
 ]
 var asideTodos=[
 	{
 		title:'我喜欢的音乐',
-		icon:'./imgs/svg/like.svg',
+		icon:'./imgs/SVG/like.svg',
 		switchIcon:'',
 		showManage:false
 	}
