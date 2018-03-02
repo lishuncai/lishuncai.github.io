@@ -9,7 +9,7 @@ var show={
 var asideContent=[
 	{
 		title:'搜索',
-		icon:'./imgs/svg/search.svg'
+		icon:'./imgs/SVG/search.svg'
 	},
 	{
 		title:'发现音乐',
@@ -194,7 +194,7 @@ var app=new Vue({
 				this.asideTodos.push({
 					title:this.listTitle,
 					icon:'./imgs/SVG/music_playlist.svg',
-					switchIcon:./'imgs/SVG/switch.svg',
+					switchIcon:'./imgs/SVG/switch.svg',
 					showManage:false
 				})
 				asideTodos=this.asideTodos
