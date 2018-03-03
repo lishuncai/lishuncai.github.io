@@ -193,14 +193,14 @@ function sliding(){
     window.cancelAnimationFrame(circlesAnimation);
     document.body.addEventListener('mousemove',move,false);
     document.body.addEventListener('mouseup',up,false);
-    document.body.addEventListener('touchmove',function(e){
+    circles.ontouchmove=function(e){
       touch=e.targetTouches[0];
       move(e,touch)
-    },false);
-    document.body.addEventListener('touchend',function(e){
+    }
+    circles.ontouchend=function(e){
       touch=e.targetTouches[0];
       up(e,touch)
-    },false); 
+    }
   }
   circles.onmousedown=function(e){
     e=e||window.event;
