@@ -9,6 +9,7 @@ var show={
 var asideContent=[
 	{
 		title:'搜索',
+<<<<<<< HEAD
 		icon:'./imgs/svg/search.svg'
 	},
 	{
@@ -30,12 +31,39 @@ var asideContent=[
 	{
 		title:'我的收藏',
 		icon:'./imgs/svg/collection.svg'
+=======
+		icon:'./imgs/SVG/search.svg'
+	},
+	{
+		title:'发现音乐',
+		icon:'./imgs/SVG/music-note.svg'
+	},
+	{
+		title:'最近播放',
+		icon:'./imgs/SVG/time.svg'
+	},
+	{
+		title:'下载管理',
+		icon:'./imgs/SVG/download.svg'
+	},
+	{
+		title:'我的电台',
+		icon:'./imgs/SVG/radio.svg'
+	},
+	{
+		title:'我的收藏',
+		icon:'./imgs/SVG/collection.svg'
+>>>>>>> parent of a52a8ca... 优化代码
 	}
 ]
 var asideTodos=[
 	{
 		title:'我喜欢的音乐',
+<<<<<<< HEAD
 		icon:'./imgs/svg/like.svg',
+=======
+		icon:'./imgs/SVG/like.svg',
+>>>>>>> parent of a52a8ca... 优化代码
 		switchIcon:'',
 		showManage:false
 	}
@@ -169,6 +197,7 @@ Vue.component('songs',{
 		}
 	})
 
+<<<<<<< HEAD
 var app = new Vue({
   el: "#musicApp",
   data: {
@@ -253,6 +282,8 @@ var app = new Vue({
     },
   }
 =======
+=======
+>>>>>>> parent of a52a8ca... 优化代码
 var app=new Vue({
 	el:"#musicApp",
 	data:{
@@ -277,8 +308,13 @@ var app=new Vue({
 			if(this.listTitle){
 				this.asideTodos.push({
 					title:this.listTitle,
+<<<<<<< HEAD
 					icon:'./imgs/svg/music_playlist.svg',
 					switchIcon:'./imgs/svg/switch.svg',
+=======
+					icon:'./imgs/SVG/music_playlist.svg',
+					switchIcon:'./imgs/SVG/switch.svg',
+>>>>>>> parent of a52a8ca... 优化代码
 					showManage:false
 				})
 				asideTodos=this.asideTodos
@@ -336,5 +372,8 @@ var app=new Vue({
 			}
 		},
 	}
+<<<<<<< HEAD
+>>>>>>> parent of a52a8ca... 优化代码
+=======
 >>>>>>> parent of a52a8ca... 优化代码
 });
