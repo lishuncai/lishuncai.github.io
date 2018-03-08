@@ -235,7 +235,7 @@ var app = new Vue({
         this.show[obj] = !this.show[obj]
         this.show.Bg = !this.show.Bg
       } else {
-        for (var i in this.show) {
+        for (var i of Object.keys(this.show)) {
           this.show[i] = false
         }
       }
