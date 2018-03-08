@@ -1,135 +1,115 @@
-#container>.contains>.center {
-  flex: 9;
-  position: relative;
-  display: flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: -moz-flex;
+#container>.contains>.center{
+	flex: 9;
+	position:relative;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
 }
-
-#container>.contains>.center>.center-contains {
-  max-width: 999px;
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
+#container>.contains>.center>.center-contains{
+	max-width: 999px;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: hidden;
 }
-
-#imgsPlay {
-  width: 100%;
-  position: relative;
-  margin-top: 4%;
+#imgsPlay{
+	width: 100%;
+	position: relative;
+	margin-top: 4%;
 }
-
-#imgsPlay .leftBut, .rightBut {
-  width: 40px;
-  color: white;
-  display: flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: -moz-flex;
-  flex-flow: row;
-  align-items: center;
-  font-size: 40px;
-  font-weight: lighter;
-  background: rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 0px;
-  bottom: 4px;
-  z-index: 999;
-  visibility: hidden;
+#imgsPlay .leftBut,.rightBut{
+	width: 40px;
+	color: white;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
+	flex-flow: row;
+	align-items: center;
+	font-size: 40px;
+	font-weight: lighter;
+	background: rgba(0,0,0,0.1);
+	position: absolute;
+	top: 0px;
+	bottom: 4px;
+	z-index: 999;
+	visibility: hidden;
 }
-
-#imgsPlay .leftBut {
-  left: 0;
+#imgsPlay .leftBut{
+	left: 0;
 }
-
-#imgsPlay .rightBut {
-  right: 0;
+#imgsPlay .rightBut{
+	right: 0;
 }
-
-#imgsPlay .leftBut:hover {
-  background: rgba(0, 0, 0, 0.2);
+#imgsPlay .leftBut:hover{
+	background: rgba(0,0,0,0.2);
 }
-
-#imgsPlay .rightBut:hover {
-  background: rgba(0, 0, 0, 0.2);
+#imgsPlay .rightBut:hover{
+	background: rgba(0,0,0,0.2);
 }
-
-#imgsPlay .leftBut:active {
-  background-color: rgba(0, 0, 0, 0.5);
-  transform: scale(0.95);
+#imgsPlay .leftBut:active{
+	background-color: rgba(0,0,0,0.5);
+	transform: scale(0.95);
 }
-
-#imgsPlay .rightBut:active {
-  background-color: rgba(0, 0, 0, 0.5);
-  transform: scale(0.95);
+#imgsPlay .rightBut:active{
+	background-color: rgba(0,0,0,0.5);
+	transform: scale(0.95);
 }
-
 /*active要再hover后面才有效果*/
-#imgsPlay span {
-  display: inline-block;
-  margin: auto;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+#imgsPlay span{
+	display: inline-block;
+	margin: auto;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
-
-#imgsPlay .marks {
-  position: absolute;
-  left: 10%;
-  right: 10%;
-  bottom: 4%;
-  text-align: center;
-  z-index: 999;
+#imgsPlay .marks{
+	position: absolute;
+	left: 10%;
+	right: 10%;
+	bottom: 4%;
+	text-align: center;
+	z-index: 999;
 }
-
-#imgsPlay .marks span {
-  width: 8px;
-  height: 8px;
-  margin: 0 4px;
-  border: 1px solid white;
-  border-radius: 8px;
+#imgsPlay .marks span{
+	width: 8px;
+	height: 8px;
+	margin: 0 4px;
+	border: 1px solid white;
+	border-radius: 8px;
 }
-
-#imgsPlay>.items {
-  width: 300%;
+#imgsPlay>.items{
+	width: 300%;
 }
-
-[move] {
-  transition: margin-left .5s ease;
+[move]{
+	transition: margin-left .5s ease;
 }
-
-#imgsPlay>.items>.item {
-  width: calc(100% / 9);
-  padding: 2.2% 0;
-  background-size: 100% 100%;
-  display: inline-block;
-  position: relative;
-  box-shadow: inset 0px 0px 5px 500px rgba(0, 0, 0, 0.2);
+#imgsPlay>.items>.item{
+	width: calc(100% / 9);
+	padding: 2.2% 0;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: relative;
+	box-shadow: inset 0px 0px 5px 500px rgba(0,0,0,0.2);
 }
-
-#imgsPlay>.items>.item:hover {
-  box-shadow: inset 0px 0px 5px 500px rgba(120, 120, 120, 0.2);
+#imgsPlay>.items>.item:hover{
+	box-shadow: inset 0px 0px 5px 500px rgba(120,120,120,0.2);
 }
-
-[scale='big'] {
-  transition: all .3s;
-  transform: scale(1.2) translateY(-8%);
-  /*-8.3333%最精确 */
-  filter: brightness(1.8);
-  z-index: 99;
+[scale='big']{
+	transition: all .3s;
+	transform: scale(1.2) translateY(-8%);/*-8.3333%最精确 */
+	filter: brightness(1.8);
+	z-index: 99;
 }
-
-[scale='small'] {
-  transition: all .3s;
-  transform: scale(1) translateY(0);
-  z-index: 0;
+[scale='small']{
+	transition: all .3s;
+	transform: scale(1) translateY(0);
+	z-index:0;
 }
-
-[transform] {
-  transform: scale(1.2) translateY(-8%);
-  filter: brightness(1.8);
-  z-index: 99;
+[transform]{
+	transform: scale(1.2) translateY(-8%);
+	filter: brightness(1.8);
+	z-index: 99;
 }

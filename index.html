@@ -1,115 +1,125 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>网易云</title>
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/container-imgplay.css">
-  <link rel="stylesheet" href="css/container-group.css">
-  <link rel="stylesheet" href="css/media.css">
-  <link rel="stylesheet" href="css/弹窗背景.css">
-  <link rel="stylesheet" href="css/调整栏目.css">
-  <link rel="stylesheet" href="css/aside.css">
-  <link rel="stylesheet" href="css/footer.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>网易云</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/container-imgplay.css">
+	<link rel="stylesheet" href="css/container-group.css">
+	<link rel="stylesheet" href="css/media.css">
+	<link rel="stylesheet" href="css/弹窗背景.css">
+	<link rel="stylesheet" href="css/调整栏目.css">
+	<link rel="stylesheet" href="css/aside.css">
+	<link rel="stylesheet" href="css/footer.css">
 
 </head>
-
 <body>
-  <!-- 最新音乐组件 -->
-  <script type="text/x-template" id='my-newsong'>
-    <div>
-      <p class='h'>
-        <span>最新音乐</span>
-        <span class='more'>更多 &gt;</span>
-      </p>
-      <div class='newsong-list'>
-        <div v-for='i in 10' v-cloak>
-          <div>{{String(i).length>1?i:'0'+i}}</div>
-          <div :style='colorBlock()' class='colorBlock'></div>
-          <div>
-            <span>{{items.songname[i-1]}}</span><br>
-            <span>{{items.author[i-1]}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
+	<!-- 最新音乐组件 -->
+	<script type="text/x-template" id='my-newsong'>
+		<div>
+			<p class='h'>
+				<span>最新音乐</span>
+				<span class='more'>更多 &gt;</span>
+			</p>
+			<div class='newsong-list'>
+				<div v-for='i in 10' v-cloak>
+					<div>{{String(i).length>1?i:'0'+i}}</div>
+					<div :style='colorBlock()' class='colorBlock'></div>
+					<div>
+						<span>{{items.songname[i-1]}}</span><br>
+						<span>{{items.author[i-1]}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
 
-  <div id="musicApp">
-    <!-- 弹窗背景 -->
-    <transition name='coverBg'>
-      <div id='adjust-pop' v-if='show.Bg' v-cloak @click="toggle()">
-      </div>
-    </transition>
-    <!-- 新建歌单弹窗 -->
-    <!-- 被逼无奈提到前面，chrome和firefox浏览器，放在aside中时，可能重新渲染的关系（v-if或v-show)，会受aside样式的影响，比如aside不被渲染时（响应式），此弹窗会消失；aside 的z-index会影响到弹窗的z-index;而edge则不会。想想还是分离比较好 -->
-    <transition name='fade-songList'>
-      <div class='songList' v-if="show.songList" v-cloak>
-        <form>
-          <legend>编辑歌单标题</legend>
-          <br>
-          <input type="text" class='title-text' name="listTitle" autocomplete="off" autofocus placeholder="请输入歌单标题" v-model.trim="listTitle" @keyup.enter="submit">
-          <br>
-          <hr>
-          <input type="checkbox" name="visible" id='Privacy'>
-          <label for='Privacy'><small>是否设置为隐私歌单</small></label>
-          <br>
-          <button @click.prevent="toggle()">取消</button>
-          <button @click.prevent="submit">提交</button>
-          <!-- 这里click='submit'和'submit()'是有区别的，'submit'
+	 <div id="musicApp">
+		 <!-- 弹窗背景 -->
+		 <transition name='coverBg'>
+				 <div id='adjust-pop'
+					 v-if='show.Bg'
+					 v-cloak
+					 @click="toggle()">
+				 </div>
+		 </transition>
+		 <!-- 新建歌单弹窗 -->
+		 <!-- 被逼无奈提到前面，chrome和firefox浏览器，放在aside中时，可能重新渲染的关系（v-if或v-show)，会受aside样式的影响，比如aside不被渲染时（响应式），此弹窗会消失；aside 的z-index会影响到弹窗的z-index;而edge则不会。想想还是分离比较好 -->
+		 <transition name='fade-songList' >
+			 <div class='songList' v-if="show.songList" v-cloak>
+				 <form>
+					 <legend>编辑歌单标题</legend>
+					 <br>
+					 <input
+						 type="text"
+						 class='title-text'
+						 name="listTitle"
+						 autocomplete="off"
+						 autofocus
+						 placeholder="请输入歌单标题"
+						 v-model.trim="listTitle"
+						 @keyup.enter="submit">
+						 <br>
+						 <hr>
+						 <input type="checkbox" name="visible" id='Privacy'>
+						 <label for='Privacy'><small>是否设置为隐私歌单</small></label>
+						 <br>
+						 <button @click.prevent="toggle()">取消</button>
+						 <button @click.prevent="submit">提交</button>
+						 <!-- 这里click='submit'和'submit()'是有区别的，'submit'
 						 会默认传递一个参数，为DOM节点 -->
-        </form>
-      </div>
-    </transition>
-    <!-- header -->
-    <div id='header'>
-      <div class='menu-but' @click="toggle('aside')">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class='title'>网易云音乐</div>
-    </div>
-    <transition name='fade-aside'>
-      <div id='aside' v-if='show.aside' v-cloak>
-        <div class="aside-menu">
-          <div class='menu'>
-            <div class='menu-header'>
-              <p>头像</p>
-              <p>name</p>
-            </div>
-            <div><span>我的消息</span></div>
-            <div><span>商城</span></div>
-            <div><span>在线听歌免流量</span></div>
-            <div><span>我的好友</span></div>
-            <div><span>附近的人</span></div>
-            <div><span>个性皮肤</span></div>
-            <div><span>听歌识曲</span></div>
-            <div><span>定时停止播放</span></div>
-            <div><span>扫一扫</span></div>
-            <div><span>音乐闹钟</span></div>
-            <div><span>驾驶模式</span></div>
-            <div><span>音乐云盘</span></div>
-          </div>
-        </div>
-      </div>
-    </transition>
-    <div id="container">
-      <div class='myMusic-list' key='myMusic-list'>
-        <dl>
-          <br>
-          <dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
-            <embed :src="item.icon" type="image/svg+xml" v-cloak>
-            <span v-cloak>{{item.title}}</span>
-          </dd>
-          <dt class='myList'>
+				 </form>
+			 </div>
+		 </transition>
+ <!-- header -->
+	 	<div id='header'>
+	 		<div class='menu-but' @click="toggle('aside')">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+	 		<div class='title'>网易云音乐</div>
+	 	</div>
+		<transition name='fade-aside'>
+			<div id='aside' v-if='show.aside' v-cloak>
+				<div class="aside-menu"  >
+					<div class='menu'>
+						<div class='menu-header'>
+							<p>头像</p>
+							<p>name</p>
+						</div>
+						<div><span>我的消息</span></div>
+						<div><span>商城</span></div>
+						<div><span>在线听歌免流量</span></div>
+						<div><span>我的好友</span></div>
+						<div><span>附近的人</span></div>
+						<div><span>个性皮肤</span></div>
+						<div><span>听歌识曲</span></div>
+ 						<div><span>定时停止播放</span></div>
+						<div><span>扫一扫</span></div>
+						<div><span>音乐闹钟</span></div>
+						<div><span>驾驶模式</span></div>
+						<div><span>音乐云盘</span></div>
+					</div>
+				</div>
+			</div>
+		</transition>
+	 	<div id="container">
+			<div class='myMusic-list'  key='myMusic-list'>
+				<dl>
+					<br>
+					<dd v-for='(item,index) in asideContent' key='index' class='asideContent'>
+							<embed :src="item.icon" type="image/svg+xml" v-cloak>
+							<span v-cloak>{{item.title}}</span>
+					</dd>
+					<dt class='myList'>
 						<span>我的歌单</span>
 						<div @click="toggle('songList')"
 							title="新建歌单"><span>+</span>
 						</div>
 					</dt>
+<<<<<<< HEAD
           <!-- 我的歌单 -->
           <dd v-for='(item,index) in asideTodos' :key='index' class='myNewList'>
             <embed :src="item.icon" type="image/svg+xml" v-cloak>
@@ -212,6 +222,116 @@
     <div id="footer">
       <canvas id='canvas'></canvas>
       <!-- <div class='song-pic' @click="full=!full">
+=======
+					<!-- 我的歌单 -->
+					<dd v-for='(item,index) in asideTodos' :key='index' class='myNewList'>
+						<embed :src="item.icon" type="image/svg+xml" v-cloak>
+						<span>{{item.title}}</span>
+						<div class="switchIcon">
+							<div @click="edit(index)"></div>
+							<embed :src="item.switchIcon" type="image/svg+xml" v-cloak>
+						</div>
+						<div class="listManage" v-if="item.showManage" v-cloak>
+							<span @click="remove(index)" v-cloak>删除</span>
+							<span @click="rebuild('songList',index)" v-cloak>编辑</span>
+						</div>
+					</dd>
+				</dl>
+			</div>
+	 		<div class="contains">
+	 			<div class="top">
+	 				<div class="tip">
+						<input id='audio' type="file" name="" accept="audio/*">
+					</div>
+	 				<div class="tab">
+	 					<p>
+	 						<span>个性推荐</span>
+	 						<span>歌单</span>
+ 							<span>最新音乐</span>
+ 							<span>歌手</span>
+ 						</p>
+	 				</div>
+	 			</div>
+	 			<div class="center">
+	 				<div class='center-contains'>
+	 					<div class="imgs-play" id='imgsPlay'>
+		 					<div class="items" id="items">
+		 						<div v-for="item in items" class="item" :style='item'>
+		 						</div>
+		 					</div>
+							<div class='marks'>
+								<span v-for='i in 6'></span>
+							</div>
+							<div class='leftBut'><span>&lt;</span></div>
+							<div class='rightBut'><span>&gt;</span></div>
+	 					</div>
+	 					<div id="FM">
+							<div>
+								<div>
+									<div class="imgs"><img src="imgs/图标/FM.png"></div>
+									<div class="content">
+										<span>私人FM</span><br>
+										<span>享受你的音乐专属推荐</span>
+									</div>
+								</div>
+							</div>
+							<div class="add-border">
+								<div>
+									<div class="imgs"><img src="imgs/图标/Day.png"></div>
+									<div class="content">
+										<span>每日推荐</span><br>
+										<span>根据你的口味生成</span>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>
+									<div class="imgs"><img src="imgs/图标/Top.png"></div>
+									<div class="content">
+										<span>排行榜</span><br>
+										<span>最热音乐榜</span>
+									</div>
+								</div>
+							</div>
+	 					</div>
+						<!-- 推荐歌单 -->
+	 					<Recom
+	 						id='Recom'
+	 						:listsong='listDetails'
+	 						:list='listDetails.dec'
+	 						class='Recom'>
+	 					</Recom>
+						<!-- 最新音乐 -->
+	 					<songs
+	 						id='songs'
+	 						:song='newsong'
+	 						class='newsong'>
+	 					</songs>
+	 					<div id='adjust'>
+	 						<p>根据喜好调整栏目顺序</p>
+							<div>
+								<button @click="toggle('adjust')">调整栏目</button>
+							</div>
+ 						</div>
+	 				</div>
+ 					<transition name='fade-adiust' >
+						<div class='list-change' v-if='show.adjust' v-cloak>
+							<p>调整栏目顺序
+								<span>x</span>
+							</p>
+							<div>
+								<button @click="toggle('adjust')">调整</button>
+							</div>
+						</div>
+					</transition>
+	 			</div>
+	 		</div>
+	 	</div>
+<!-- footer -->
+	 	<div id="footer">
+			<canvas id='canvas' ></canvas>
+			<!-- <div class='song-pic' @click="full=!full">
+>>>>>>> parent of a52a8ca... 优化代码
 				<img
 					src="imgs/图标/icons/fullscreen.png"
 					alt="全屏"
@@ -223,42 +343,47 @@
 					v-else
 					key="narrow">
 			</div> -->
-      <!-- 控件 -->
-      <div class="controls">
-        <div class='last' v-cloak>
-          <img src="imgs/图标/icons/last.png" alt="last">
-        </div>
-        <div class='play' @click="play=!play" v-cloak>
-          <img class='suspend' src="imgs/图标/icons/suspend.png" v-show="play">
-          <img class='resume' src="imgs/图标/icons/play.png" v-show="!play">
-        </div>
-        <div class='next' v-cloak>
-          <img src="imgs/图标/icons/next.png" alt="next">
-        </div>
-      </div>
-      <!-- 进度条 -->
-      <div class="music-viwe">
-        <div class='controls-time'>
-          <div class='duration'>
-            <div class='circles'>
-              <div class='circles-center'></div>
-            </div>
-            <div class='duration-red'></div>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="noise">
+	<!-- 控件 -->
+			<div class="controls"  >
+				<div class='last' v-cloak>
+					<img src="imgs/图标/icons/last.png" alt="last" >
+				</div>
+				<div class='play' @click="play=!play" v-cloak>
+					<img
+						class='suspend'
+						src="imgs/图标/icons/suspend.png"
+						v-show="play">
+					<img
+						class='resume'
+						src="imgs/图标/icons/play.png"
+						v-show="!play">
+				</div>
+				<div class='next' v-cloak>
+					<img src="imgs/图标/icons/next.png" alt="next">
+				</div>
+			</div>
+	<!-- 进度条 -->
+			<div class="music-viwe">
+				<div class='controls-time'>
+					<div class='duration'>
+						<div class='circles'>
+							<div class='circles-center'></div>
+						</div>
+						<div class='duration-red'></div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="noise">
 				<input id='range' step='1' type="range" value='30' min='0' max='100'>
 				<span id='num'></span>
 			</div> -->
-      <!-- 选择文件 -->
-    </div>
-  </div>
-  <script src="javascript/vue.js"></script>
-  <script src="javascript/index.js"></script>
-  <script src="javascript/图片轮播.js"></script>
-  <script src="javascript/touch事件.js"></script>
-  <script src="javascript/播放控件.js"></script>
+	<!-- 选择文件 -->
+	 	</div>
+	 </div>
+	 <script src="javascript/vue.js"></script>
+	 <script src="javascript/index.js"></script>
+	 <script src="javascript/图片轮播.js"></script>
+	 <script src="javascript/touch事件.js"></script>
+	 <script src="javascript/播放控件.js"></script>
 </body>
-
 </html>
