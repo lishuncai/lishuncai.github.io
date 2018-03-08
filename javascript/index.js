@@ -9,33 +9,33 @@ var show={
 var asideContent=[
 	{
 		title:'搜索',
-		icon:'./imgs/SVG/search.svg'
+		icon:'./imgs/svg/search.svg'
 	},
 	{
 		title:'发现音乐',
-		icon:'./imgs/SVG/music-note.svg'
+		icon:'./imgs/svg/music-note.svg'
 	},
 	{
 		title:'最近播放',
-		icon:'./imgs/SVG/time.svg'
+		icon:'./imgs/svg/time.svg'
 	},
 	{
 		title:'下载管理',
-		icon:'./imgs/SVG/download.svg'
+		icon:'./imgs/svg/download.svg'
 	},
 	{
 		title:'我的电台',
-		icon:'./imgs/SVG/radio.svg'
+		icon:'./imgs/svg/radio.svg'
 	},
 	{
 		title:'我的收藏',
-		icon:'./imgs/SVG/collection.svg'
+		icon:'./imgs/svg/collection.svg'
 	}
 ]
 var asideTodos=[
 	{
 		title:'我喜欢的音乐',
-		icon:'./imgs/SVG/like.svg',
+		icon:'./imgs/svg/like.svg',
 		switchIcon:'',
 		showManage:false
 	}
@@ -194,8 +194,8 @@ var app = new Vue({
       if (this.listTitle) {
         this.asideTodos.push({
           title: this.listTitle,
-          icon: './imgs/SVG/music_playlist.svg',
-          switchIcon: './imgs/SVG/switch.svg',
+          icon: './imgs/svg/music_playlist.svg',
+          switchIcon: './imgs/svg/switch.svg',
           showManage: false
         })
         asideTodos = this.asideTodos
@@ -278,8 +278,8 @@ var app=new Vue({
 			if(this.listTitle){
 				this.asideTodos.push({
 					title:this.listTitle,
-					icon:'./imgs/SVG/music_playlist.svg',
-					switchIcon:'./imgs/SVG/switch.svg',
+					icon:'./imgs/svg/music_playlist.svg',
+					switchIcon:'./imgs/svg/switch.svg',
 					showManage:false
 				})
 				asideTodos=this.asideTodos
