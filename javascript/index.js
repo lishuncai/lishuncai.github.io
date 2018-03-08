@@ -10,6 +10,7 @@ var asideContent=[
 	{
 		title:'搜索',
 <<<<<<< HEAD
+<<<<<<< HEAD
 		icon:'./imgs/svg/search.svg'
 	},
 	{
@@ -32,6 +33,8 @@ var asideContent=[
 		title:'我的收藏',
 		icon:'./imgs/svg/collection.svg'
 =======
+=======
+>>>>>>> parent of a52a8ca... 优化代码
 		icon:'./imgs/SVG/search.svg'
 	},
 	{
@@ -53,6 +56,9 @@ var asideContent=[
 	{
 		title:'我的收藏',
 		icon:'./imgs/SVG/collection.svg'
+<<<<<<< HEAD
+>>>>>>> parent of a52a8ca... 优化代码
+=======
 >>>>>>> parent of a52a8ca... 优化代码
 	}
 ]
@@ -60,7 +66,11 @@ var asideTodos=[
 	{
 		title:'我喜欢的音乐',
 <<<<<<< HEAD
+<<<<<<< HEAD
 		icon:'./imgs/svg/like.svg',
+=======
+		icon:'./imgs/SVG/like.svg',
+>>>>>>> parent of a52a8ca... 优化代码
 =======
 		icon:'./imgs/SVG/like.svg',
 >>>>>>> parent of a52a8ca... 优化代码
@@ -198,6 +208,7 @@ Vue.component('songs',{
 	})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var app = new Vue({
   el: "#musicApp",
   data: {
@@ -284,6 +295,8 @@ var app = new Vue({
 =======
 =======
 >>>>>>> parent of a52a8ca... 优化代码
+=======
+>>>>>>> parent of a52a8ca... 优化代码
 var app=new Vue({
 	el:"#musicApp",
 	data:{
@@ -309,8 +322,13 @@ var app=new Vue({
 				this.asideTodos.push({
 					title:this.listTitle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					icon:'./imgs/svg/music_playlist.svg',
 					switchIcon:'./imgs/svg/switch.svg',
+=======
+					icon:'./imgs/SVG/music_playlist.svg',
+					switchIcon:'./imgs/SVG/switch.svg',
+>>>>>>> parent of a52a8ca... 优化代码
 =======
 					icon:'./imgs/SVG/music_playlist.svg',
 					switchIcon:'./imgs/SVG/switch.svg',
@@ -373,6 +391,9 @@ var app=new Vue({
 		},
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a52a8ca... 优化代码
+=======
 >>>>>>> parent of a52a8ca... 优化代码
 =======
 >>>>>>> parent of a52a8ca... 优化代码
