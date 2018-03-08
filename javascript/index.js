@@ -169,7 +169,6 @@ Vue.component('songs',{
 		}
 	})
 
-<<<<<<< HEAD
 var app = new Vue({
   el: "#musicApp",
   data: {
