@@ -5,6 +5,7 @@ function addTouch(obj) {
   var x;
   var y;
   var moveX;
+  var moveY;
   var width = document.body.clientWidth;
   var left;
   obj.addEventListener('touchstart', handleStart, false);
@@ -22,18 +23,27 @@ function addTouch(obj) {
   }
 
   function handleMove(e) {
-    e.preventDefault();
     e.stopPropagation();
+    if (obj.offsetLeft > 0 || obj.offsetLeft < -width) {
+      return
+    }
     var touch = e.targetTouches[0];
     left = obj.offsetLeft;
     moveX = touch.clientX - x;
-    obj.style.left = obj.offsetLeft + moveX / 4 + 'px'; //除以10可让过度更平缓
+    moveY = touch.clientY - y;
+    if (moveX < 120 && moveX > -120) {
+      return
+    }
+    if ((moveY / moveX > 1) && (moveY / moveX < -1)) {
+      return
+    }
+    obj.style.left = obj.offsetLeft + moveX / 4 + 'px';
     if (obj.offsetLeft > 0) {
       obj.style.left = 0
     } else if (obj.offsetLeft < -width) {
       obj.style.left = -width + 'px'
     }
-    return false
+
   }
 
   function handleEnd() {
