@@ -44,7 +44,7 @@ function build(reader, when) {
   ArrayBuffer = reader.result;
 
   ac.decodeAudioData(ArrayBuffer, function(buffer) {
-    if (n != count) return;
+    if (n !== count) return;
     bufferSource = ac.createBufferSource();
     bufferSource.buffer = buffer;
     times = bufferSource.buffer.duration;
@@ -142,7 +142,7 @@ function playDuration(when) {
     /*这里有个问题,如果用
     circlesAnimation=window.requestAniamtionFrame(playDuration);
     第二次执行 draw(when) 时，when 会自动变成
-    bufferSource.buffer.duration 的值，神奇的bug！！！*/
+    bufferSource.buffer.duration 的值*/
   }
 }
 

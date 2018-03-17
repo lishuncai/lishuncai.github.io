@@ -8,9 +8,6 @@
   #container {
     position: relative;
   }
-  .myMusic-list {
-    width: 100%;
-  }
   #imgsPlay {
     margin-top: 25%;
     margin-left: -2px;
@@ -80,6 +77,9 @@
   .myMusic-list {
     height: 100%;
     flex: 0 0 100vw;
+  }
+  .myMusic-list dl{
+    padding-right: 16px;
   }
   .change-list .list {
     width: 100%;
