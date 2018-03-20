@@ -79,7 +79,7 @@
     flex: 0 0 100vw;
   }
   .myMusic-list dl{
-    padding-right: 16px;
+  	margin-right: 0;
   }
   .change-list .list {
     width: 100%;

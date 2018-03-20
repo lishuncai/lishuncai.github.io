@@ -1,0 +1,13 @@
+require( '../css/index.css' )
+require( '../css/container-imgplay.css' )
+require( '../css/container-group.css' )
+require( '../css/background.css' )
+require( '../css/adjust.css' )
+require( '../css/aside.css' )
+require( '../css/footer.css' )
+require( '../css/media.css' )
+
+require( './index.js' )
+require( './imgPlay.js' )
+require( './musicPlay.js' )
+require( './touch.js' )

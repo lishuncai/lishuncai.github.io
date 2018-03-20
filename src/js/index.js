@@ -1,3 +1,5 @@
+//import Vue from './vue.js';
+var Vue = require('./vue.js')
 // aside过渡
 var show = {
   Bg: false,
@@ -8,32 +10,32 @@ var show = {
 //aside 列表内容
 var asideContent = [{
     title: '搜索',
-    icon: './imgs/svg/search.svg'
+    icon: 'src/static/svg/search.svg'
   },
   {
     title: '发现音乐',
-    icon: './imgs/svg/music-note.svg'
+    icon: 'src/static/svg/music-note.svg'
   },
   {
     title: '最近播放',
-    icon: './imgs/svg/time.svg'
+    icon: 'src/static/svg/time.svg'
   },
   {
     title: '下载管理',
-    icon: './imgs/svg/download.svg'
+    icon: 'src/static/svg/download.svg'
   },
   {
     title: '我的电台',
-    icon: './imgs/svg/radio.svg'
+    icon: 'src/static/svg/radio.svg'
   },
   {
     title: '我的收藏',
-    icon: './imgs/svg/collection.svg'
+    icon: 'src/static/svg/collection.svg'
   }
 ]
 var asideTodos = [{
   title: '我喜欢的音乐',
-  icon: './imgs/svg/like.svg',
+  icon: 'musicPlay/src/static/svg/like.svg',
   switchIcon: '',
   showManage: false
 }]
@@ -54,7 +56,7 @@ window.onload = function() {
 //轮播图图片；
 var imgs = [];
 for (var i = 0; i < 6; i++) {
-  var url = 'background-image:url(imgs/轮播图/' + i + '.jpg)';
+  var url = 'background-image:url(src/static/imgplay/' + i + '.jpg)';
   imgs.push(url);
 }
 //重复三张图片
@@ -107,7 +109,7 @@ var bgImgs = bgimgs();
 function bgimgs() {
   var imgs_url = [];
   for (var i = 0; i < 10; i++) {
-    imgs_url.push('url(./imgs/推荐歌单/' + i + '.jpg)');
+    imgs_url.push('url(src/static/song/' + i + '.jpg)');
   }
   return imgs_url
 }
@@ -211,8 +213,8 @@ var app = new Vue({
       if (this.listTitle) {
         this.asideTodos.push({
           title: this.listTitle,
-          icon: './imgs/svg/music_playlist.svg',
-          switchIcon: './imgs/svg/switch.svg',
+          icon: './src/static/svg/music_playlist.svg',
+          switchIcon: './src/static/svg/switch.svg',
           showManage: false
         })
         asideTodos = this.asideTodos
