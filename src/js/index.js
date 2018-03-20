@@ -35,11 +35,7 @@ var asideContent = [{
 ]
 var asideTodos = [{
   title: '我喜欢的音乐',
-<<<<<<< HEAD:src/js/index.js
-  icon: 'musicPlay/src/static/svg/like.svg',
-=======
   icon: 'src/static/svg/like.svg',
->>>>>>> dev:src/js/index.js
   switchIcon: '',
   showManage: false
 }]
@@ -60,11 +56,7 @@ window.onload = function() {
 //轮播图图片；
 var imgs = [];
 for (var i = 0; i < 6; i++) {
-<<<<<<< HEAD:src/js/index.js
   var url = 'background-image:url(src/static/imgplay/' + i + '.jpg)';
-=======
-  var url = 'background-image:url(../src/static/imgplay/' + i + '.jpg)';
->>>>>>> dev:src/js/index.js
   imgs.push(url);
 }
 //重复三张图片
@@ -117,11 +109,7 @@ var bgImgs = bgimgs();
 function bgimgs() {
   var imgs_url = [];
   for (var i = 0; i < 10; i++) {
-<<<<<<< HEAD:src/js/index.js
-    imgs_url.push('url(src/static/song/' + i + '.jpg)');
-=======
     imgs_url.push("url(../src/static/song/' + i + '.jpg)");
->>>>>>> dev:src/js/index.js
   }
   return imgs_url
 }
@@ -225,13 +213,8 @@ var app = new Vue({
       if (this.listTitle) {
         this.asideTodos.push({
           title: this.listTitle,
-<<<<<<< HEAD:src/js/index.js
-          icon: './src/static/svg/music_playlist.svg',
-          switchIcon: './src/static/svg/switch.svg',
-=======
           icon: 'src/static/svg/music_playlist.svg',
           switchIcon: 'src/static/svg/switch.svg',
->>>>>>> dev:src/js/index.js
           showManage: false
         })
         asideTodos = this.asideTodos

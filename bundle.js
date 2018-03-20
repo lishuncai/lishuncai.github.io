@@ -1220,7 +1220,7 @@ var asideContent = [{
 ]
 var asideTodos = [{
   title: '我喜欢的音乐',
-  icon: 'musicPlay/src/static/svg/like.svg',
+  icon: 'src/static/svg/like.svg',
   switchIcon: '',
   showManage: false
 }]
@@ -1294,7 +1294,7 @@ var bgImgs = bgimgs();
 function bgimgs() {
   var imgs_url = [];
   for (var i = 0; i < 10; i++) {
-    imgs_url.push('url(src/static/song/' + i + '.jpg)');
+    imgs_url.push("url(../src/static/song/' + i + '.jpg)");
   }
   return imgs_url
 }
@@ -1398,8 +1398,8 @@ var app = new Vue({
       if (this.listTitle) {
         this.asideTodos.push({
           title: this.listTitle,
-          icon: './src/static/svg/music_playlist.svg',
-          switchIcon: './src/static/svg/switch.svg',
+          icon: 'src/static/svg/music_playlist.svg',
+          switchIcon: 'src/static/svg/switch.svg',
           showManage: false
         })
         asideTodos = this.asideTodos
