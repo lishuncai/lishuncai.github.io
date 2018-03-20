@@ -6,14 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-quive="X-UA-Compatible" content="IE=EDge, chrome=1">
   <title>网易云</title>
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/container-imgplay.css">
-  <link rel="stylesheet" href="css/container-group.css">
-  <link rel="stylesheet" href="css/弹窗背景.css">
-  <link rel="stylesheet" href="css/调整栏目.css">
-  <link rel="stylesheet" href="css/aside.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/media.css">
 </head>
 
 <body>
@@ -155,7 +147,7 @@
             <div id="FM">
               <div>
                 <div>
-                  <div class="imgs"><img src="imgs/图标/FM.png"></div>
+                  <div class="imgs"><img src="src/static/icon/FM.png"></div>
                   <div class="content">
                     <span>私人FM</span><br>
                     <span>享受你的音乐专属推荐</span>
@@ -164,7 +156,7 @@
               </div>
               <div class="add-border">
                 <div>
-                  <div class="imgs"><img src="imgs/图标/Day.png"></div>
+                  <div class="imgs"><img src="src/static/icon/Day.png"></div>
                   <div class="content">
                     <span>每日推荐</span><br>
                     <span>根据你的口味生成</span>
@@ -173,7 +165,7 @@
               </div>
               <div>
                 <div>
-                  <div class="imgs"><img src="imgs/图标/Top.png"></div>
+                  <div class="imgs"><img src="src/static/icon/Top.png"></div>
                   <div class="content">
                     <span>排行榜</span><br>
                     <span>最热音乐榜</span>
@@ -202,6 +194,10 @@
               <div>
                 <button @click="toggle('adjust')">调整</button>
               </div>
+              <p> 
+              	<br>
+              	功能尚未开发
+              </p>
             </div>
           </transition>
         </div>
@@ -212,12 +208,12 @@
       <canvas id='canvas'></canvas>
       <!-- <div class='song-pic' @click="full=!full">
 				<img
-					src="imgs/图标/icons/fullscreen.png"
+					src=""
 					alt="全屏"
 					v-if="full"
 					key="full">
 				<img
-					src="imgs/图标/icons/narrow.png"
+					src=""
 					alt="缩小"
 					v-else
 					key="narrow">
@@ -225,14 +221,14 @@
       <!-- 控件 -->
       <div class="controls">
         <div class='last' v-cloak>
-          <img src="imgs/图标/icons/last.png" alt="last">
+          <img src="../src/static/icon/icons/last.png" alt="last">
         </div>
         <div class='play' @click="play=!play" v-cloak>
-          <img class='suspend' src="imgs/图标/icons/suspend.png" v-show="play">
-          <img class='resume' src="imgs/图标/icons/play.png" v-show="!play">
+          <img class='suspend' src="../src/static/icon/icons/suspend.png" v-show="play">
+          <img class='resume' src="../src/static/icon/icons/play.png" v-show="!play">
         </div>
         <div class='next' v-cloak>
-          <img src="imgs/图标/icons/next.png" alt="next">
+          <img src="../src/static/icon/icons/next.png" alt="next">
         </div>
       </div>
       <!-- 进度条 -->
@@ -253,11 +249,6 @@
       <!-- 选择文件 -->
     </div>
   </div>
-  <script src="javascript/vue.js" defer></script>
-  <script src="javascript/index.js" defer></script>
-  <script src="javascript/imgPlay.js" defer></script>
-  <script src="javascript/touch.js" defer></script>
-  <script src="javascript/musicPlay.js" defer></script>
+  <script src='bundle.js'></script>
 </body>
-
 </html>
