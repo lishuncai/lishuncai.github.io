@@ -1294,7 +1294,7 @@ var bgImgs = bgimgs();
 function bgimgs() {
   var imgs_url = [];
   for (var i = 0; i < 10; i++) {
-    imgs_url.push("url(../src/static/song/' + i + '.jpg)");
+    imgs_url.push('url(src/static/song/' + i + '.jpg)');
   }
   return imgs_url
 }
